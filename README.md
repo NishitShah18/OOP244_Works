@@ -1,5 +1,4 @@
-# OOP244_WORKSHOPS
-# Name : Nishit Gaurang Shah
-# Section : OOP244 NFF
-# Email ID : ngshah3@myseneca.ca
-Hi Professor Fardad, I will complete setting up my github asap.
+# Nishit Shah
+# Student number: 130 176 217
+# Email Id: ngshah3@myseneca.ca
+# Section: OOP244NFF
