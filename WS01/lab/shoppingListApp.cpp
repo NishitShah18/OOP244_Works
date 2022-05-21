@@ -35,8 +35,9 @@ int main() {
     bool done = false;
     loadList();
     while (!done) {
-        system(APP_OS_WINDOWS ? "cls" : "clear");
-        switch (listMenu()) {
+        //system(APP_OS_WINDOWS ? "cls" : "clear");
+        // I commented this function out because I was not able to submit my work using terminal on my MacBook
+	switch (listMenu()) {
         case 1:
             toggleBought();
             break;
