@@ -23,7 +23,7 @@ using namespace std;
 using namespace sdds;
 
 // SET TO FALSE WHEN COMLING ON LINUX
-const bool APP_OS_WINDOWS = true;
+const bool APP_OS_WINDOWS = false;
 
 //////////////////////////
 // FUNCTION PROTOTYPES 
@@ -35,8 +35,7 @@ int main() {
     bool done = false;
     loadList();
     while (!done) {
-        //system(APP_OS_WINDOWS ? "cls" : "clear");
-        // I commented this function out because I was not able to submit my work using terminal on my MacBook
+        system(APP_OS_WINDOWS ? "cls" : "clear");
 	switch (listMenu()) {
         case 1:
             toggleBought();
