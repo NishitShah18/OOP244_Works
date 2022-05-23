@@ -1,11 +1,11 @@
 /*************************************************************************
 
 Name			: Nishit Gaurang Shah
-Student Num.	: 130 176 217
+Student Num.		: 130 176 217
 Email ID		: ngshah3@myseneca.ca
 Section			: OOP244NFF
 
-Date :  May 2022
+Date : 23rd May 2022
 
 Autheticity Declaraition :
 I declare that I have done all the coding by myself and only copied the

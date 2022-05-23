@@ -85,7 +85,7 @@ int main()
 		{
 			// This function should produce no output since the user didn't take the quiz yet
 			quizzer::ShowQuizResults();
-			cout << "****** Answer [3] to every question. *****\n";
+			cout << "****** Answer [3] to every question. *****\n"; // submission was asking to enter 2 every time.!
 
 			int i = 1;
 			do

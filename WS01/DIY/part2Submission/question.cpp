@@ -1,11 +1,11 @@
 /*************************************************************************
 
 Name			: Nishit Gaurang Shah
-Student Num.	: 130 176 217
+Student Num.		: 130 176 217
 Email ID		: ngshah3@myseneca.ca
 Section			: OOP244NFF
 
-Date :  May 2022
+Date : 23rd May 2022
 
 Autheticity Declaraition :
 I declare that I have done all the coding by myself and only copied the
@@ -24,10 +24,6 @@ using namespace std;
 
 namespace quizzer
 {
-	//////////////////////////
-	// GLOBAL VARIABLES 
-	//////////////////////////
-	
 	//////////////////////////
 	// FUNCTION DEFINITIONS 
 	//////////////////////////
@@ -65,13 +61,6 @@ namespace quizzer
 
 		return;
 	}
-/*
-What does 'std::printf("Hello\n")' means in C++?
-1. nothing, the syntax is not correct
-2. call the function "std" and pass "printf" as parameter
-3. insert the text "Hello" into a file
-4. print the text "Hello" to the screen
-*/
 
 	void showFormattedQuestion(struct Question* rec)
 	{
