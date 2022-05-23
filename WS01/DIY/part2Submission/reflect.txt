@@ -1,0 +1,20 @@
+/*************************************************************************
+
+Name			: Nishit Gaurang Shah
+Student Num.		: 130 176 217
+Email ID		: ngshah3@myseneca.ca
+Section			: OOP244NFF
+
+Date : 23rd May 2022
+
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+
+*************************************************************************/
+
+In this workshop 1 part 1 (lab), I learned how to create namespaces and how and why should I use the existing namespace "std" in my code. Using namespaces was a new concept for me, so read the whole topic on 'OOP244.ca' twice. I leant that there are so many differences in using a namespace in '.cpp' file compared to '.h'. '.h' file has so many restrictions for declaration. I tried to declare global variable in '.h' file and it gave me error. Then I researched about it and I got to know that global variables are supposed to be declared in '.cpp' file of a module only. Everything else was easy in the workshop.
+
+In the workshop 1 part 2 (DIY), the LoadQuiz() function took my 2 days. Yes, I am weak when it comes to file handling, but I literally watched 20 tutorials of this topic on youtube, not only for c++, also for c language. Then I finally completed the function on third day with stack memory warning. For me, the hardest part of this DIY was reading data from the file. After completing the LoadQuiz() function, I quickly preplanned every other functions which were suppose to be declared in quiz module and then, I stared working on it. Due to time pressure, which was my mismanagement, I complete the quiz module without using the question module. Then, I selected some logic associated with question, and created question module with three functions. Then I uploaded it to git and pulled it in matrix for -feedback submission. Then I got error about strcmp function. After this error, I understood that I forgot to include cstring header file in both modules. So, I completed it and my -feedback submission was successful. After this I completed the reflect.txt and submitted every thin using matrix.
+
+The main topic learned by me were following : File Handling, Namespace, using C functions in C++
