@@ -53,7 +53,7 @@ int main()
 			{
 				indexController++;
 				answerIndexController = 0;
-				ignore = (fscanf(sfptr, "%4[^\n] %[^\n]\n",
+				(fscanf(sfptr, "%4[^\n] %[^\n]\n",
 					temp[indexController].type, temp[indexController].question) == 0);
 			}
 			else if (ch == '[')
