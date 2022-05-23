@@ -16,6 +16,7 @@ code that my professor provided to complete my workshops and assignments.
 #define _CRT_SECURE_NO_WARNINGS
 
 #include<iostream>
+#include<cstring>
 #include"quiz.h"
 #include"question.h"
 

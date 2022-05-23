@@ -17,6 +17,7 @@ code that my professor provided to complete my workshops and assignments.
 
 #include<iostream>
 #include<cstdio>
+#include<cstring>
 #include"quiz.h"
 #include"question.h"
 
@@ -102,7 +103,6 @@ namespace quizzer
 	int IsQuizValid()
 	{
 		int returnValue = -1;
-		int i = 0;
 		int totalQuestions = countQuestions();
 
 		if (totalQuestions < 5)
@@ -111,8 +111,7 @@ namespace quizzer
 		}
 		else
 		{
-			int i = 0, j = 0, exitCode = 0;
-			 // change it
+			int i = 0;
 			int validQuestions = 0;
 
 			for (i = 0; i < totalQuestions; i++)
