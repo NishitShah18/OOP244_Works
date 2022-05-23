@@ -38,7 +38,7 @@ int main()
 	else
 	{
 		struct Question temp[MAX_NO_OF_QUE] = { {} };
-		int ignore = 0;
+		//int ignore = 0;
 		int indexController = -1;
 		int answerIndexController = 0;
 		char ch = '\0';
