@@ -94,6 +94,8 @@ namespace sdds {
             cout << "Error: incorrect number of records read; the data is possibly corrupted." << endl;
         }
 
+        closeFile();
+
         return returnValue;
     }
 
