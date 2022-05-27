@@ -30,5 +30,7 @@ namespace sdds {
 	bool read(char* name);
 	bool read(int& studentNumber);
 	bool read(char& grade);
+
+	void deallocateFptr();
 }
 #endif // !SDDS_FILE_H_
