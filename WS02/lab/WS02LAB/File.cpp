@@ -63,9 +63,4 @@ namespace sdds {
         int returnValue = (fscanf(fptr, "%c\n", &grade) == 1);
         return returnValue;
     }
-
-    void deallocateFptr()
-    {
-        fptr = nullptr;
-    }
 }

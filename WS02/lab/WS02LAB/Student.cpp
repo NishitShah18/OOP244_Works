@@ -122,7 +122,6 @@ namespace sdds {
             delete[] students[i].m_name;
         }
         delete[] students;
-        deallocateFptr();
         return;
     }
 }
