@@ -136,7 +136,7 @@ namespace sdds {
 					tempString = tempString + strptr[i].name[s];
 				}
 				cout << index << ") " << tempString << ":" << endl;
-				cout << strptr[i].year << "-" << strptr[i].month << "-" << strptr[i].date;
+				cout << strptr[i].year << "-" << strptr[i].month << "-" << strptr[i].date << endl;
 				cout << "===================================" << endl;
 				index++;
 			}
