@@ -1,3 +1,18 @@
+/*************************************************************************
+Workshop 2 Part 2
+Full Name   : Nishit Gaurang Shah
+Student ID# : 130 176 217
+Email       : ngshah3@myseneca.ca
+Section     : OOP244NFF
+
+Date : 30th May 2022
+
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+
+*************************************************************************/
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include<iostream>
@@ -9,11 +24,17 @@ using namespace std;
 
 namespace sdds {
 
+	//////////////////////////
+	// GLOBAL VARIABLES 
+	//////////////////////////
 	BirthDateData* strptr = nullptr;
 	int userMonth = 0;
 	int noOfBirthDates = 0;
 	char* fileName = nullptr;
 
+	//////////////////////////
+	// FUNCTION DEFINITIONS 
+	//////////////////////////
 	bool beginSearch(const char* filename)
 	{
 		bool returnValue = true;
@@ -78,7 +99,7 @@ namespace sdds {
 			//read Birth Date
 			read(strptr[i].month);
 			read(strptr[i].date);
-			read(strptr[i].year, 1); // year
+			read(strptr[i].year, 1);
 		}
 		closeFile();
 	}

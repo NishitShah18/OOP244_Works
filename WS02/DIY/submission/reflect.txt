@@ -12,3 +12,34 @@ I declare that I have done all the coding by myself and only copied the
 code that my professor provided to complete my workshops and assignments.
 
 *************************************************************************/
+
+In workshop 2, I learned how to use function overloading and I implied it to read() function in File module and in display() and load() functions in Student module, in part 1. I also use the same concept in DIY part while reading data form bd.csv file. This was my first project where I use heap memory in coding. The main purpose of using heap memory is it allows programmers to allocate memory dynamically for any type of data type. When I first tried to run the part 1, it showed me an error that 1 block of heap memory was still reachable, and I soon figured out what was the problem. I forgot to close the file which caused this error. To solve it I added closeFile() function in the load function in Student module.
+    bool load(const char* filename)
+    {
+        ......
+
+        openFile(filename);
+
+        ......
+
+        closeFile(); // not adding this caused problem
+
+        return returnValue;
+    }
+After that I successfully uploaded the part 1. For DIY part, when I was trying -feedback submission, I got error which showed illegal use of free()/ delete/ delete[] in void endSearch() function. So I soon figured out the problem. The problem was :
+1	void endSearch()
+2	{
+3		delete fileName;
+4
+5		cout << "Birthdate Search Program Closed." << endl;
+6	}
+In line 4, I used delete because I forgot that pointer filename was pointing to char array, then I added [] after delete and the problem was solved:
+1	void endSearch()
+2	{
+3		delete[] fileName; // solved
+4
+5		cout << "Birthdate Search Program Closed." << endl;
+6	}
+I have had some endl errors as well but I solved it pretty easily. After that I completed my reflection and submitted the files successfully.
+
+So the main topic covered in this workshops were how to use heap memory for dynamic memory allocation and how to overload function which is a part of polymorphism in oops concepts.
