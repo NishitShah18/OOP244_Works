@@ -22,7 +22,7 @@ namespace sdds {
 
 		if (openFile(filename))
 		{
-			returnValue = true;
+			cout << "Birthdate search program" << endl;
 			closeFile();
 		}
 		else
