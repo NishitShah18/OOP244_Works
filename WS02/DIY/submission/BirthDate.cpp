@@ -1,18 +1,3 @@
-/*************************************************************************
-Workshop 2 Part 2
-Full Name   : Nishit Gaurang Shah
-Student ID# : 130 176 217
-Email       : ngshah3@myseneca.ca
-Section     : OOP244NFF
-
-Date : 30th May 2022
-
-Autheticity Declaraition :
-I declare that I have done all the coding by myself and only copied the
-code that my professor provided to complete my workshops and assignments.
-
-*************************************************************************/
-
 #define _CRT_SECURE_NO_WARNINGS
 
 #include<iostream>
@@ -24,18 +9,10 @@ using namespace std;
 
 namespace sdds {
 
-	//////////////////////////
-	// GLOBAL VARIABLES 
-	//////////////////////////
 	BirthDateData* strptr = nullptr;
-	BirthDateData* monthptr = nullptr;
 	int userMonth = 0;
 	int noOfBirthDates = 0;
-	int monthMatched = 0;
 
-	//////////////////////////
-	// FUNCTION DEFINITIONS 
-	//////////////////////////
 	bool beginSearch(const char* filename)
 	{
 		bool returnValue = true;
@@ -78,31 +55,12 @@ namespace sdds {
 
 		bool returnValue = false;
 		int matchCounter = 0;
-		int copyMatched = 0;
 
 		for (int i = 0; i < noOfBirthDates; i++)
 		{
 			if (strptr[i].month == month)
 			{
 				matchCounter++;
-			}
-		}
-		
-		monthMatched = matchCounter;
-		monthptr = new BirthDateData[monthMatched];
-
-		for (int i = 0; i < noOfBirthDates; i++)
-		{
-			if (strptr[i].month == month)
-			{
-				monthptr[copyMatched].name = new char[(strlen(strptr[i].name) + 1)];
-				strcpy(monthptr[copyMatched].name, strptr[i].name);
-
-				monthptr[copyMatched].date = strptr[i].date;
-				monthptr[copyMatched].month = strptr[i].month;
-				monthptr[copyMatched].year = strptr[i].year;
-
-				copyMatched++;
 			}
 		}
 
@@ -155,6 +113,8 @@ namespace sdds {
 	{
 		int matchCounter = 0;
 		int i = 0;
+		int index = 1;
+		//string tempString; // didn't work
 
 		for (i = 0; i < noOfBirthDates; i++)
 		{
@@ -166,11 +126,20 @@ namespace sdds {
 
 		cout << matchCounter << " birthdates found:" << endl;
 
-		for (i = 0; i < monthMatched; i++)
+		for (i = 0; i < noOfBirthDates; i++)
 		{
-			cout << (i+1) << ") " << monthptr[i].name << ":" << endl;
-			cout << monthptr[i].year << "-" << monthptr[i].month << "-" << monthptr[i].date << endl;
-			cout << "===================================" << endl;
+			if (strptr[i].month == userMonth)
+			{
+				string tempString;
+				for (int s = 0; s < (int)strlen(strptr[i].name); s++)
+				{
+					tempString = tempString + strptr[i].name[s];
+				}
+				cout << index << ") " << tempString << ":" << endl;
+				cout << strptr[i].year << "-" << strptr[i].month << "-" << strptr[i].date;
+				cout << "===================================" << endl;
+				index++;
+			}
 		}
 
 		return;
@@ -178,28 +147,17 @@ namespace sdds {
 
 	void deallocate()
 	{
-		for (int i = 0; i < monthMatched; i++)
-		{
-			delete[] monthptr[i].name;
-			cout << "deallocating" << i + 1 << endl;
-		}
-		delete[] monthptr;
-		cout << "deallocated" << endl;
-		return;
+		cout << "";
+		//nothing
 	}
 
 	void endSearch()
 	{
-		closeFile();
-
 		for (int i = 0; i < noOfBirthDates; i++)
 		{
 			delete[] strptr[i].name;
 		}
 		delete[] strptr;
-
-		cout << "Birthdate Search Program Closed." << endl;
-
-		return;
+			cout << "Birthdate Search Program Closed." << endl;
 	}
 }
