@@ -39,6 +39,8 @@ namespace sdds {
 	bool beginSearch(const char* filename);
 
 	bool readBirthDate(int month);
+	
+	void load();
 
 	void sort();
 
