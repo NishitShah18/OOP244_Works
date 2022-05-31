@@ -12,32 +12,17 @@ namespace sdds {
 	BirthDateData* strptr = nullptr;
 	int userMonth = 0;
 	int noOfBirthDates = 0;
+	char* fileName = nullptr;
 
 	bool beginSearch(const char* filename)
 	{
 		bool returnValue = true;
+		fileName = new char[(strlen(filename) + 1)];
+		strcpy(fileName,filename);
 
 		if (openFile(filename))
 		{
-			cout << "Birthdate search program" << endl;
-			
-			noOfBirthDates = noOfRecords();
-			strptr = new BirthDateData[noOfBirthDates];
-
-			char localString[LOCAL_ARRAY_SIZE + 1] = "\0";
-
-			for (int i = 0; i < noOfBirthDates; i++)
-			{
-				//read name
-				read(localString);
-				strptr[i].name = new char[(strlen(localString) + 1)];
-				strcpy(strptr[i].name, localString);
-
-				//read Birth Date
-				read(strptr[i].month);
-				read(strptr[i].date);
-				read(strptr[i].year,1); // year
-			}
+			returnValue = true;
 			closeFile();
 		}
 		else
@@ -51,6 +36,8 @@ namespace sdds {
 
 	bool readBirthDate(int month)
 	{	
+		load();
+
 		userMonth = month;
 
 		bool returnValue = false;
@@ -70,6 +57,30 @@ namespace sdds {
 		}
 
 		return returnValue;
+	}
+
+	void load()
+	{
+		openFile(fileName);
+
+		noOfBirthDates = noOfRecords();
+		strptr = new BirthDateData[noOfBirthDates];
+
+		char localString[LOCAL_ARRAY_SIZE + 1] = "\0";
+
+		for (int i = 0; i < noOfBirthDates; i++)
+		{
+			//read name
+			read(localString);
+			strptr[i].name = new char[(strlen(localString) + 1)];
+			strcpy(strptr[i].name, localString);
+
+			//read Birth Date
+			read(strptr[i].month);
+			read(strptr[i].date);
+			read(strptr[i].year, 1); // year
+		}
+		closeFile();
 	}
 
 	void sort()
@@ -114,7 +125,6 @@ namespace sdds {
 		int matchCounter = 0;
 		int i = 0;
 		int index = 1;
-		//string tempString; // didn't work
 
 		for (i = 0; i < noOfBirthDates; i++)
 		{
@@ -147,17 +157,17 @@ namespace sdds {
 
 	void deallocate()
 	{
-		cout << "";
-		//nothing
-	}
-
-	void endSearch()
-	{
 		for (int i = 0; i < noOfBirthDates; i++)
 		{
 			delete[] strptr[i].name;
 		}
 		delete[] strptr;
-			cout << "Birthdate Search Program Closed." << endl;
+	}
+
+	void endSearch()
+	{
+		delete fileName;
+
+		cout << "Birthdate Search Program Closed." << endl;
 	}
 }
