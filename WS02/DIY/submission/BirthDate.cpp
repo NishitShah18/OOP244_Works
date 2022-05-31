@@ -166,7 +166,7 @@ namespace sdds {
 
 	void endSearch()
 	{
-		delete fileName;
+		delete[] fileName;
 
 		cout << "Birthdate Search Program Closed." << endl;
 	}
