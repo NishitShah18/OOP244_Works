@@ -118,7 +118,7 @@ namespace sdds {
        }
 
        // Flushes the keyboard
-       is.ignore(numeric_limits<streamsize>::max(), '\n');
+       is.ignore(1000, '\n');
        
        // Returns the istream object
        return is;
