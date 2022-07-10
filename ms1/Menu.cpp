@@ -17,6 +17,135 @@ that my professor provided to complete my project milestones.
 */
 
 #define _CRT_SECURE_NO_WARNINGS
+#include "Menu.h"
+
+#include "Utils.h"
+
+#include <iostream>
+
+#include <cstring>
+
+#include <iomanip>
+
+using namespace std;
+using namespace sdds;
+namespace sdds {
+    MenuItem::MenuItem() {
+        m_menuContent = nullptr;
+    }
+    MenuItem::MenuItem(const char* content) {
+        if (content != nullptr) {
+            m_menuContent = new char[strlen(content) + 1];
+            strcpy(m_menuContent, content);
+        }
+        else
+            m_menuContent = nullptr;
+    }
+    void MenuItem::display(ostream& os) const {
+        os << m_menuContent;
+    }
+    MenuItem::operator bool() const {
+        return m_menuContent != nullptr;
+    }
+    MenuItem::operator
+        const char* () const {
+        return m_menuContent;
+    }
+    MenuItem::~MenuItem() {
+        delete[] m_menuContent;
+        m_menuContent = nullptr;
+    }
+    Menu::Menu() {
+        m_menuTitle.m_menuContent = nullptr;
+        m_numberOfItems = 0;
+    }
+    Menu::Menu(const char* menuTitle) {
+        if (menuTitle != nullptr && menuTitle[0] != '\0') {
+            int length = strlen(menuTitle) + 1;
+            m_menuTitle.m_menuContent = new char[length];
+            strcpy(m_menuTitle.m_menuContent, menuTitle);
+        }
+        else {
+            delete[] m_menuTitle.m_menuContent;
+            m_menuTitle.m_menuContent = nullptr;
+            for (int i = 0; i < m_numberOfItems; i++) {
+                delete m_itemList[i];
+                m_itemList[i] = nullptr;
+            }
+            m_numberOfItems = 0;
+        }
+    }
+    void Menu::printTitle() const {
+        if (m_menuTitle != nullptr)
+            cout << m_menuTitle.m_menuContent;
+    }
+    void Menu::display() const {
+        printTitle();
+        if (m_menuTitle != nullptr) {
+            cout << ':' << endl;
+        }
+        if (!(m_numberOfItems < 0)) {
+            int i = 0;
+            while (i < m_numberOfItems) {
+                cout.width(2);
+                cout.setf(ios::right);
+                cout << i + 1;
+                cout << "- ";
+                cout << m_itemList[i]->m_menuContent << endl;
+                i++;
+            }
+            cout << " 0- Exit" << endl;
+            cout << "> ";
+        }
+    }
+    std::ostream& Menu::display(ostream& os) const {
+        printTitle();
+        return os;
+    }
+    Menu& Menu::operator<<(const char* menuitemConent) {
+        if (menuitemConent != nullptr && m_numberOfItems < MAX_MENU_ITEMS) {
+            m_itemList[m_numberOfItems] = new MenuItem(menuitemConent);
+            m_numberOfItems++;
+        }
+        return *this;
+    }
+    Menu::operator bool() const {
+        return m_menuTitle != nullptr;
+    }
+    Menu::operator int() const {
+        return m_numberOfItems;
+    }
+    Menu::operator unsigned int() const {
+        return m_numberOfItems;
+    }
+    int Menu::run() const {
+        display();
+        int input = inputIntRange(0, m_numberOfItems);
+        return input;
+    }
+    const char* Menu::operator[](int i) const {
+        return *m_itemList[i % m_numberOfItems];
+    }
+    int Menu::operator~() const {
+        return run();
+    }
+    std::ostream& operator<<(std::ostream& os, const Menu& menu) {
+        menu.display(os);
+        return os;
+    }
+    Menu::~Menu() {
+        delete[] m_menuTitle;
+        m_menuTitle.m_menuContent = nullptr;
+        for (int i = 0; i < m_numberOfItems; i++) {
+            delete m_itemList[i];
+            m_itemList[i] = nullptr;
+        }
+    }
+}
+
+
+/*
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
 #include "Menu.h"
@@ -40,7 +169,7 @@ namespace sdds {
         return false;
     }
 
-    MenuItem::operator const char*()const { 
+    MenuItem::operator const char*()const {
         return m_menuItem;
     }
 
@@ -128,7 +257,7 @@ namespace sdds {
     Menu::operator int()const { return m_numberOfItems; }
 
     Menu::operator unsigned int()const { return m_numberOfItems; }
-    
+
     Menu::operator bool()const {
         return m_menuTitle != nullptr;
     }
@@ -154,3 +283,4 @@ namespace sdds {
         return os;
     }
 }
+*/

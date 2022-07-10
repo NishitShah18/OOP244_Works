@@ -19,6 +19,52 @@ that my professor provided to complete my project milestones.
 #ifndef SDDS_MENU_H__
 #define SDDS_MENU_H__
 #include <iostream>
+
+namespace sdds {
+	class Menu;
+	const int MAX_MENU_ITEMS = 20;
+	class MenuItem {
+		char* m_menuContent{};
+		MenuItem();
+		MenuItem(const char*);
+		void display(std::ostream&) const;
+		MenuItem(const MenuItem&) = delete;
+		MenuItem& operator = (const MenuItem&) = delete;
+		operator bool() const;
+		operator
+			const char* () const;
+		~MenuItem();
+		friend class Menu;
+	};
+	class Menu {
+		MenuItem m_menuTitle{};
+		MenuItem* m_itemList[MAX_MENU_ITEMS]{};
+		int m_numberOfItems{};
+	public:
+		Menu();
+		Menu(const char*);
+		Menu(const Menu&) = delete;
+		Menu& operator = (const Menu&) = delete;
+		std::ostream& display(std::ostream&) const;
+		void display() const;
+		int run() const;
+		operator int() const;
+		operator bool() const;
+		operator unsigned int() const;
+		int operator~() const;
+		void printTitle() const;
+		Menu& operator << (const char*);
+		const char* operator[](int) const;
+		~Menu();
+	};
+	std::ostream& operator << (std::ostream&, const Menu&);
+}
+#endif // !SDDS_MENU_H__
+
+/*
+#ifndef SDDS_MENU_H__
+#define SDDS_MENU_H__
+#include <iostream>
 #include "Utils.h"
 using namespace std;
 namespace sdds {
@@ -32,11 +78,10 @@ namespace sdds {
 		MenuItem();	// If no value is provided for the description at the moment of creation, the MenuItem should be set to an empty state.
 		MenuItem(const char* item); // Allocates and sets the content of the MenuItem to a Cstring value at the moment of instantiation (or initialization).
 		
-		/*
-			Rule of Three
-			A MenuItem object cannot be copied from or assigned to another MenuItem object.
-			(Copy constructor and Copy assignment are deleted)
-		*/
+		//	Rule of Three
+		//	A MenuItem object cannot be copied from or assigned to another MenuItem object.
+		//	(Copy constructor and Copy assignment are deleted)
+		
 		MenuItem(const MenuItem&) = delete;
 		MenuItem& operator=(const MenuItem&) = delete;
 
@@ -102,3 +147,4 @@ namespace sdds {
 	std::ostream& operator<<(std::ostream&, const Menu&);
 }
 #endif // !SDDS_MENU_H__
+*/
