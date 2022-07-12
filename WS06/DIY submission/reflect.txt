@@ -1,0 +1,20 @@
+/************************************************************************* 
+Workshop 6 Part 2 
+
+Full Name   : Nishit Gaurang Shah 
+Student ID# : 130 176 217 
+Email       : ngshah3@myseneca.ca 
+Section     : OOP244NFF 
+
+Date : 11th July 2022 
+
+Autheticity Declaraition : 
+I declare that I have done all the coding by myself and only copied the 
+code that my professor provided to complete my workshops and assignments. 
+*************************************************************************/ 
+
+In workshop 6 part 1, when I started number module, I was confused the what is a copy constructor, so I remembered that I have done this concept in workshop 5 as well, but in the break, I slightly forgot the topic so I re-read the whole course note. Now my concept about the copy constructor and friend functions was clear.  Then I created the number.h file as given instructions in the ms06 readme. And then I completed the number.cpp easily with clear understanding of copy constructor and its uses. 
+
+In workshop 6 part 2, I knew that a copy constructor is a member function of a class that initializes an object with an existing object of the same class, but in this workshop, I needed to overload the copy operator, which was very similar to copy constructor. I got to know that “a copy assignment operator of class N is a non-template non-static member function with the name operator= that takes exactly one parameter of type N, N&, const N&.” Then I completed the basket module. It was easy to complete. 
+
+So in this workshop 6, I studied about copy constructor and copy assignment of a particular class. And also, I revised the friend functions as well. 
