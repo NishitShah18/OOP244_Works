@@ -1,7 +1,7 @@
 /*
 Final Project Milestone 1
-Module      : Date
-Filename    : Date.cpp
+Module      : Menu
+Filename    : Menu.cpp
 Version 1.0
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
@@ -17,180 +17,405 @@ that my professor provided to complete my project milestones.
 */
 
 #define _CRT_SECURE_NO_WARNINGS
-#include <iomanip>
 #include <iostream>
-#include <ctime>
+#include <cstring>
+#include "Menu.h"
+#include "Utils.h"
 using namespace std;
-#include "Date.h"
 namespace sdds {
-   bool Date::validate() {
-      errCode(NO_ERROR);
-      if (m_year < MIN_YEAR || m_year > m_CUR_YEAR + 1) {
-         errCode(YEAR_ERROR);
-      }
-      else if (m_mon < 1 || m_mon > 12) {
-         errCode(MON_ERROR);
-      }
-      else if (m_day < 1 || m_day > mdays()) {
-         errCode(DAY_ERROR);
-      }
-      return !bad();
-   }
-   int Date::mdays()const {
-      int days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, -1 };
-      int mon = m_mon >= 1 && m_mon <= 12 ? m_mon : 13;
-      mon--;
-      return days[mon] + int((mon == 1) * ((m_year % 4 == 0) && (m_year % 100 != 0)) || (m_year % 400 == 0));
-   }
-   int Date::systemYear()const {
-      time_t t = time(NULL);
-      tm lt = *localtime(&t);
-      return lt.tm_year + 1900;
-   }
-   void Date::setToToday() {
-      time_t t = time(NULL);
-      tm lt = *localtime(&t);
-      m_day = lt.tm_mday;
-      m_mon = lt.tm_mon + 1;
-      m_year = lt.tm_year + 1900;
-      errCode(NO_ERROR);
-   }
-   int Date::daysSince0001_1_1()const { // Rata Die day since 0001/01/01
-      int ty = m_year;
-      int tm = m_mon;
-      if (tm < 3) {
-         ty--;
-         tm += 12;
-      }
-      return 365 * ty + ty / 4 - ty / 100 + ty / 400 + (153 * tm - 457) / 5 + m_day - 306;
-   }
-   Date::Date() :m_CUR_YEAR(systemYear()) {
-      setToToday();
-   }
-   Date::Date(int year, int mon, int day) : m_CUR_YEAR(systemYear()) {
-      m_year = year;
-      m_mon = mon;
-      m_day = day;
-      validate();
-   }
-   const char* Date::dateStatus()const {
-      return DATE_ERROR[errCode()];
-   }
-   int Date::currentYear()const {
-      return m_CUR_YEAR;
-   }
-   void Date::errCode(int readErrorCode) {
-      m_ErrorCode = readErrorCode;
-   }
-   int Date::errCode()const {
-      return m_ErrorCode;
-   }
-   bool Date::bad()const {
-      return m_ErrorCode != 0;
-   }
+    MenuItem::MenuItem() {
+        m_menuItem = nullptr;
+    }
 
-   std::istream& Date::read(std::istream& is) {
-       //Clears the error code by setting it NO_ERROR
-       errCode(NO_ERROR);
+    MenuItem::MenuItem(const char* item)
+    {
+        if (item != nullptr) {
+            m_menuItem = new char[strlen(item) + 1];
+            strcpy(m_menuItem, item);
+        }
+        else {
+            m_menuItem = nullptr;
+        }
+    }
 
-       // Reads the year using istream 
-       is >> m_year;
-       // Ignores a single character after the year value to bypass the Slash.
-       is.ignore();
-       // Reads the month using istream
-       is >> m_mon;
-       // Ignores a single character after the month value to bypass the Slash.
-       is.ignore();
-       // Reads the day using istream
-       is >> m_day;
+    MenuItem::operator bool() const
+    {
+        return m_menuItem != nullptr;
+    }
 
-       // Checks if istream has failed.  . If not, it will validate the values entered.
-       if (is.fail()) {
-           // If it did fail, 
-           // It will set the error code to CIN_FAILED
-           errCode(CIN_FAILED);
-           // And clears the istream
-           is.clear();
-       }
-       else {
-           // If not, it will validate the values entered.
-           this -> validate();
-       }
+    MenuItem::operator const char* () const
+    {
+        return m_menuItem;
+    }
 
-       // Flushes the keyboard
-       is.ignore(1000, '\n');
-       
-       // Returns the istream object
-       return is;
-   }
+    std::ostream& MenuItem::display(std::ostream& os) const
+    {
+        if (*this) {
+            os << m_menuItem;
+        }
+        return os;
+    }
 
-   std::ostream& Date::write(std::ostream& os)const {
-       // If the Date object is in a “bad” state (it is invalid) print the “dateStatus()”.
-       if (bad()) {
-           os << dateStatus();
-       }
+    MenuItem::~MenuItem()
+    {
+        delete[] m_menuItem;
+    }
 
-       // Otherwise, the function should write the date using the ostream object
-       else {
-           // Prints the year
-           os << m_year;
-           // Prints a Slash “/”
-           os << '/';
-           // Prints the month in two spaces, padding the left digit with zero if the month is a single-digit number
-           os.fill('0');
-           os << right << setw(2) << m_mon;
-           // Prints a Slash “/”
-           os << '/';
-           // Prints the day in two spaces, padding the left digit with zero if the day is a single-digit number
-           os << right << setw(2) << m_day;
-           // Makes sure the padding is set back to spaces from zero
-           os.fill(' ');
-       }
+    Menu::Menu() {
+        m_menuTitle.m_menuItem = nullptr;
+        m_numberOfItems = 0;
+    }
 
-       // Returns the ostream object
-       return os;
-   }
-   
-   // Comparison operator overload methods
-   bool Date::operator== (const Date& rhs)const {
-       return (this->daysSince0001_1_1() == rhs.daysSince0001_1_1());
-   }
+    Menu::Menu(const char* menuTitle) : m_menuTitle(menuTitle), m_numberOfItems(0) {}
 
-   bool Date::operator!= (const Date& rhs)const {
-       return (this->daysSince0001_1_1() != rhs.daysSince0001_1_1());
-   }
-   bool Date::operator>= (const Date& rhs)const {
-       return (this->daysSince0001_1_1() >= rhs.daysSince0001_1_1());
-   }
+    std::ostream& Menu::displayTitle(std::ostream& os) const
+    {
+        return m_menuTitle.display(os);
+    }
 
-   bool Date::operator<= (const Date& rhs)const {
-       return (this->daysSince0001_1_1() <= rhs.daysSince0001_1_1());
-   }
+    std::ostream& Menu::displayMenu(std::ostream& ostr) const
+    {
+        if (m_menuTitle) {
+            displayTitle(ostr);
+            ostr << ":";
+            ostr << endl;
+        }
+        if (!(m_numberOfItems < 0)) {
+            int i = 0;
+            while (i < m_numberOfItems) {
+                cout.width(2);
+                cout.setf(ios::right);
+                cout << i + 1;
+                cout << "- ";
+                cout << m_itemList[i]->m_menuItem << endl;
+                i++;
+            }
+            cout << " 0- Exit" << endl;
+            cout << "> ";
+        }
+        return ostr;
+    }
 
-   bool Date::operator< (const Date& rhs)const {
-       return (this->daysSince0001_1_1() < rhs.daysSince0001_1_1());
-   }
+    int Menu::run()const {
+        displayMenu(cout);
+        int i = inputIntRange(0, m_numberOfItems);
+        return i;
+    }
 
-   bool Date::operator> (const Date& rhs)const {
-       return (this->daysSince0001_1_1() > rhs.daysSince0001_1_1());
-   }
+    int Menu::operator~() const {
+        return run();
+    }
 
-   int Date::operator- (const Date& rhs)const {
-       return (daysSince0001_1_1() - rhs.daysSince0001_1_1());
-   }
+    Menu& Menu::operator<<(const char* menuitemConent)
+    {
+        if (menuitemConent != nullptr && m_numberOfItems < MAX_MENU_ITEMS)
+        {
+            m_itemList[m_numberOfItems] = new MenuItem(menuitemConent);
+            m_numberOfItems++;
+        }
+        return *this;
+    }
 
-   // Bool type conversion operator
-   Date::operator bool()const {
-       return (m_year >= 1500 && m_year <= m_CUR_YEAR &&
-           m_mon >= 1 && m_mon <= 12 &&
-           m_day >= 1 && m_day <= mdays());
-   }
+    Menu::operator int() const { return m_numberOfItems; }
+    Menu::operator unsigned int() const { return m_numberOfItems; }
 
-   ostream& operator<<(ostream& os, const Date& RO) {
-      return RO.write(os);
-   }
-   istream& operator>>(istream& is, Date& RO) {
-      return RO.read(is);
-   }
+    Menu::operator bool()const {
+        return m_menuTitle != nullptr;
+    }
 
+    const char* Menu::operator[](int i)const {
+        if (i >= m_numberOfItems) {
+            i = i % m_numberOfItems;
+        }
+        return m_itemList[i]->m_menuItem;
+    }
+
+    Menu::~Menu()
+    {
+        for (int i = 0; i < m_numberOfItems; i++)
+        {
+            delete m_itemList[i];
+        }
+    }
+
+    std::ostream& operator<<(std::ostream& os, const Menu& menu)
+    {
+        return menu.displayTitle(os);
+    }
 }
+
+
+/*
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+#include <cstring>
+#include <iomanip>
+#include "Menu.h"
+#include "Utils.h"
+
+using namespace std;
+using namespace sdds;
+
+namespace sdds {
+    MenuItem::MenuItem() {
+        m_menuItem = nullptr;
+    }
+    MenuItem::MenuItem(const char* content) {
+        if (content != nullptr) {
+            m_menuItem = new char[strlen(content) + 1];
+            strcpy(m_menuItem, content);
+        }
+        else
+            m_menuItem = nullptr;
+    }
+    std::ostream& MenuItem::displayMit(std::ostream& ostr) const
+    {
+        if (*this)
+            ostr << m_menuItem;
+        return ostr;
+    }
+    MenuItem::operator bool() const {
+        return m_menuItem != nullptr;
+    }
+    MenuItem::operator
+        const char* () const {
+        return m_menuItem;
+    }
+    MenuItem::~MenuItem() {
+        delete[] m_menuItem;
+        m_menuItem = nullptr;
+    }
+    Menu::Menu() {
+        m_menuTitle.m_menuItem = nullptr;
+        m_numberOfItems = 0;
+    }
+    Menu::Menu(const char* menuTitle) {
+        if (menuTitle != nullptr && menuTitle[0] != '\0') {
+            int length = strlen(menuTitle) + 1;
+            m_menuTitle.m_menuItem = new char[length];
+            strcpy(m_menuTitle.m_menuItem, menuTitle);
+        }
+        else {
+            delete[] m_menuTitle.m_menuItem;
+            m_menuTitle.m_menuItem = nullptr;
+            for (int i = 0; i < m_numberOfItems; i++) {
+                delete m_itemList[i];
+                m_itemList[i] = nullptr;
+            }
+            m_numberOfItems = 0;
+        }
+    }
+    void Menu::printTitle() const {
+        if (m_menuTitle != nullptr)
+            cout << m_menuTitle.m_menuItem;
+    }
+    void Menu::display() const {
+        printTitle();
+        if (m_menuTitle != nullptr) {
+            cout << ':' << endl;
+        }
+        if (!(m_numberOfItems < 0)) {
+            int i = 0;
+            while (i < m_numberOfItems) {
+                cout.width(2);
+                cout.setf(ios::right);
+                cout << i + 1;
+                cout << "- ";
+                cout << m_itemList[i]->m_menuItem << endl;
+                i++;
+            }
+            cout << " 0- Exit" << endl;
+            cout << "> ";
+        }
+    }
+    std::ostream& Menu::display(ostream& os) const {
+        printTitle();
+        return os;
+    }
+    Menu& Menu::operator<<(const char* menuitemConent) {
+        if (menuitemConent != nullptr && m_numberOfItems < MAX_MENU_ITEMS) {
+            m_itemList[m_numberOfItems] = new MenuItem(menuitemConent);
+            m_numberOfItems++;
+        }
+        return *this;
+    }
+    Menu::operator bool() const {
+        return m_menuTitle != nullptr;
+    }
+    Menu::operator int() const {
+        return m_numberOfItems;
+    }
+    Menu::operator unsigned int() const {
+        return m_numberOfItems;
+    }
+    int Menu::run() const {
+        display();
+        int input = inputIntRange(0, m_numberOfItems);
+        return input;
+    }
+    const char* Menu::operator[](int i) const {
+        return *m_itemList[i % m_numberOfItems];
+    }
+    int Menu::operator~() const {
+        return run();
+    }
+    std::ostream& operator<<(std::ostream& os, const Menu& menu) {
+        menu.display(os);
+        return os;
+    }
+    Menu::~Menu() {
+        delete[] m_menuTitle;
+        m_menuTitle.m_menuItem = nullptr;
+        for (int i = 0; i < m_numberOfItems; i++) {
+            delete m_itemList[i];
+            m_itemList[i] = nullptr;
+        }
+    }
+}
+
+
+/*
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include "Menu.h"
+#include <iomanip>
+
+using namespace std;
+
+namespace sdds {
+    MenuItem::MenuItem() {
+        m_menuItem = nullptr;
+    }
+
+    MenuItem::MenuItem(const char* item) {
+        delete[] m_menuItem;
+        m_menuItem = new char[strlen(item) + 1];
+        strcpy(m_menuItem, item);
+    }
+
+    MenuItem::operator bool()const {
+        if (m_menuItem != nullptr) return true;
+        return false;
+    }
+
+    MenuItem::operator const char*()const { 
+        return m_menuItem;
+    }
+
+    void MenuItem::displayMit(ostream& os)const {
+        os << m_menuItem;
+        return;
+    }
+
+    MenuItem::~MenuItem() {
+        delete[] m_menuItem;
+    }
+
+    Menu::Menu() {
+        m_menuTitle.m_menuItem = nullptr;
+        m_numberOfItems = 0;
+        for (int i = 0; i < m_numberOfItems; i++) {
+            m_itemList[i]->m_menuItem = nullptr;
+        }
+    }
+
+    Menu::Menu(const char* menuTitle) {
+        if (menuTitle != nullptr && menuTitle[0] != '\0') {
+            m_menuTitle.m_menuItem = new char[strlen(menuTitle) + 1];
+            strcpy(m_menuTitle.m_menuItem, menuTitle);
+            for (int i = 0; i < m_numberOfItems; i++) {
+                m_itemList[i] = nullptr;
+            }
+            m_numberOfItems = 0;
+        }
+        else {
+            delete[] m_menuTitle.m_menuItem;
+            m_menuTitle.m_menuItem = nullptr;
+            for (int i = 0; i < m_numberOfItems; i++) {
+                m_itemList[i] = nullptr;
+            }
+            m_numberOfItems = 0;
+        }
+    }
+
+    void Menu::printTitle(ostream& os)const {
+        if (m_menuTitle != nullptr) {
+            os << m_menuTitle.m_menuItem;
+        }
+        return;
+    }
+
+    void Menu::display() const {
+        if (m_menuTitle != nullptr) {
+            cout << m_menuTitle.m_menuItem << ':' << endl;
+        }
+        if (!(m_numberOfItems < 0)) {
+            int i = 0;
+            while (i < m_numberOfItems) {
+                cout.width(2);
+                cout.setf(ios::right);
+                cout << i + 1;
+                cout << "- ";
+                cout << m_itemList[i]->m_menuItem << endl;
+                i++;
+            }
+            cout << " 0- Exit" << endl;
+            cout << "> ";
+        }
+    }
+
+    int Menu::run()const{
+        display();
+        int i = inputIntRange(0, m_numberOfItems);
+        return i;
+    }
+
+    int Menu::operator~()const{
+        // I really can't think onther way to do this. But I will try next time.
+        return run();
+    }
+
+    Menu& Menu::operator<< (const char* menuitemConent) {
+        if (menuitemConent != nullptr && m_numberOfItems < MAX_MENU_ITEMS) {
+            m_itemList[m_numberOfItems] = new MenuItem(menuitemConent); // i tried to do this : m_itemList[m_numberOfItems++] = new MenuItem(menuitemConent); but it did not work, idk why?
+            m_numberOfItems++;
+        }
+        return *this;
+    }
+
+    Menu::operator int()const { return m_numberOfItems; }
+
+    Menu::operator unsigned int()const { return m_numberOfItems; }
+    
+    Menu::operator bool()const {
+        return m_menuTitle != nullptr;
+    }
+
+    const char* Menu::operator[](int i)const {
+        if (i >= m_numberOfItems) {
+            i = i % m_numberOfItems;
+        }
+        return m_itemList[i]->m_menuItem;
+    }
+
+    Menu::~Menu() {
+        delete[] m_menuTitle;
+        m_menuTitle.m_menuItem = nullptr;
+        for (int i = 0; i < m_numberOfItems; i++) {
+            delete m_itemList[i]->m_menuItem;
+            m_itemList[i] = nullptr;
+        }
+    }
+
+    std::ostream& operator<<(std::ostream& os, const Menu& menu) {
+        menu.printTitle(os);
+        return os;
+    }
+    std::ostream &operator<<(std::ostream& os, const Menu& menu)
+   {
+      return menu.displayTitle(os);
+   }
+}
+*/

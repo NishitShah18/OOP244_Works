@@ -1,7 +1,7 @@
 /*
 Final Project Milestone 1
-Module      : Date
-Filename    : Date.h
+Module      : Menu
+Filename    : Menu.h
 Version 1.0
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
@@ -15,73 +15,192 @@ I have done all the coding by myself and only copied the code
 that my professor provided to complete my project milestones.
 -----------------------------------------------------------
 */
-
-#ifndef SDDS_DATE_H__
-#define SDDS_DATE_H__
+#ifndef SDDS_MENU_H__
+#define SDDS_MENU_H__
 #include <iostream>
+using namespace std;
 namespace sdds {
-   const int NO_ERROR = 0;
-   const int CIN_FAILED = 1;
-   const int YEAR_ERROR = 2;
-   const int MON_ERROR = 3;
-   const int  DAY_ERROR = 4;
-   const char DATE_ERROR[5][16] = {
-      "No Error",
-      "cin Failed",
-      "Bad Year Value",
-      "Bad Month Value",
-      "Bad Day Value"
-   };
-   const int  MIN_YEAR = 1500;
-   class Date {
-   private:
-      int m_year;
-      int m_mon;
-      int m_day;
-      int m_ErrorCode;
-      int m_CUR_YEAR;
-      int daysSince0001_1_1()const; // returns number of days passed since the date 0001/1/1
-      bool validate();             /* validates the date setting the error code and then returning the result
-                                    true, if valid, and false if invalid.*/
-      void errCode(int);           // sets the error code
-      int systemYear()const;       // returns the current system year
-      bool bad()const;             // return true if
-      int mdays()const;            // returns the number of days in current month
-      void setToToday();           // sets the date to the current date (system date)
-   public:
-      Date();                      // creates a date with current date
-      Date(int year, int mon, int day); /* create a date with assigned values
-                                         then validates the date and sets the
-                                         error code accordingly */
-      int errCode()const;         // returns the error code or zero if date is valid
-      const char* dateStatus()const;  // returns a string corresponding the current status of the date
-      int currentYear()const;         // returns the m_CUR_YEAR value;
+	const int MAX_MENU_ITEMS = 20;
+	class Menu;
+	class MenuItem {
+		// This class holds only one Cstring of characters for the content of the menu item dynamically.
+		char* m_menuItem;
+		
+		// Constructor
+		MenuItem();	// If no value is provided for the description at the moment of creation, the MenuItem should be set to an empty state.
+		MenuItem(const char* item); // Allocates and sets the content of the MenuItem to a Cstring value at the moment of instantiation (or initialization).
+		
+		//	Rule of Three
+		//	A MenuItem object cannot be copied from or assigned to another MenuItem object.
+		//	(Copy constructor and Copy assignment are deleted)
+		
+		MenuItem(const MenuItem&) = delete;
+		MenuItem& operator=(const MenuItem&) = delete;
 
-      std::istream& read(std::istream& is = std::cin);
-      std::ostream& write(std::ostream& os = std::cout)const;
-      bool operator== (const Date& rhs)const;
-      bool operator!= (const Date& rhs)const;
-      bool operator>= (const Date& rhs)const;
-      bool operator<= (const Date& rhs)const;
-      bool operator< (const Date& rhs)const;
-      bool operator> (const Date& rhs)const;
-      int operator- (const Date& rhs)const;
-      operator bool()const;
-   };
-   std::ostream& operator<<(std::ostream& os, const Date& RO);
-   std::istream& operator>>(std::istream& is, Date& RO);
+		// bool type conversion
+		operator bool()const; // When a MenuItem is casted to “bool” it should return true, if it is not empty and it should return false if it is empty.
+		
+		// const char* type conversion  
+		operator const char*()const; // When a MenuItem is casted to “const char*” it should return the address of the content Cstring.
+
+		// displaying the MenuItem
+		std::ostream& display(std::ostream& ostr) const; // Create a method to display the content of the MenuItem on ostream. (No newline is printed after) Nothing is printed if MenuItem is empty.
+		
+		// Destructor
+		~MenuItem();
+
+		// Make the “Menu” class a friend of this class (which makes MenuItem class only accessible by the Menu class).
+		friend class Menu;
+	};
+
+	class Menu {
+		// Attributes
+		MenuItem m_menuTitle;
+		MenuItem* m_itemList[MAX_MENU_ITEMS]{};
+		int m_numberOfItems;
+
+	public:
+		// Constructors
+		Menu();
+		Menu(const char* menuTitle);
+
+		// Rule of Three
+		Menu(const Menu&) = delete;
+		Menu& operator=(const Menu&) = delete;
+
+		std::ostream& displayTitle(std::ostream& ostr) const;
+		// Create a function to display the entire Menu on ostream.
+		std::ostream& displayMenu(std::ostream& ostr) const;
+
+		// Create a member function called run. This function displays the Menu and gets the user selection.
+		int run()const;
+
+		// Overload operator~ to do exactly what the run function does (two different ways to run the menu)
+		int operator~()const;
+
+		// Overload a member insertion operator (operator<<) to add a MenuItem to the Menu.
+		Menu& operator<<(const char* menuitemConent);
+
+		// Overload two type conversions for int and unsigned int to return the number of MenuItems on the Menu.
+		operator int()const;
+		operator unsigned int()const;
+
+		// Overload the type conversion for bool to return true if the Menu has one or more MenuItems otherwise, false;
+		operator bool()const;
+
+		// Overload the indexing operator to return the const char* cast of the corresponding MenuItem in the array of MenuItem pointers. If the index passes the number of MenuItems in the Menu, loop back to the beginning.
+		const char* operator[](int i)const;
+
+		// Destructor
+		~Menu();
+	};
+
+	std::ostream& operator<<(std::ostream&, const Menu&);
 }
-#endif
+#endif // !SDDS_MENU_H__
 
 /*
-to do:
-std::istream& read(std::istream& is = std::cin);
-std::ostream& write(std::ostream& os = std::cout)const;
-bool operator==
-bool operator!=
-bool operator>=
-bool operator<=
-bool operator<
-bool operator>
-Operator-
+#ifndef SDDS_MENU_H__
+#define SDDS_MENU_H__
+#include <iostream>
+
+namespace sdds {
+	class Menu;
+	const int MAX_MENU_ITEMS = 20;
+	class MenuItem {
+		char* m_menuContent{};
+		MenuItem();
+		MenuItem(const char*);
+		void display(std::ostream&) const;
+		MenuItem(const MenuItem&) = delete;
+		MenuItem& operator = (const MenuItem&) = delete;
+		operator bool() const;
+		operator
+			const char* () const;
+		~MenuItem();
+		friend class Menu;
+	};
+	class Menu {
+		MenuItem m_menuTitle;
+		MenuItem* m_itemList[MAX_MENU_ITEMS]{};
+		int m_numberOfItems;
+	public:
+		Menu();
+		Menu(const char*);
+		Menu(const Menu&) = delete;
+		Menu& operator = (const Menu&) = delete;
+		std::ostream& display(std::ostream&) const;
+		void display() const;
+		int run() const;
+		int operator~() const;
+		void printTitle() const;
+		Menu& operator << (const char*);
+		// Overload two type conversions for int and unsigned int to return the number of MenuItems on the Menu.
+		operator int() const;
+		operator unsigned int() const;
+		// Overload the type conversion for bool to return true if the Menu has one or more MenuItems otherwise, false;
+		operator bool() const;
+		// Overload the indexing operator to return the const char* cast of the corresponding MenuItem in the array of MenuItem pointers. If the index passes the number of MenuItems in the Menu, loop back to the beginning.
+		const char* operator[](int) const;
+		// Destructor
+		~Menu();
+	};
+	// Overload the insertion operator to print the title of the Menu using cout.
+	std::ostream& operator << (std::ostream&, const Menu&);
+}
+#endif // !SDDS_MENU_H__
+*/
+
+/*
+#ifndef SDDS_MENU_H_
+#define SDDS_MENU_H_
+#include <iostream>
+namespace sdds
+{
+   const int MAX_MENU_ITEMS = 20;
+   class Menu;
+   //// MenuItem Class:
+   class MenuItem
+   {
+	  char *m_item{};
+
+   private:
+	  friend class Menu;
+	  MenuItem(const char *item = nullptr);
+	  ~MenuItem();
+	  // disable copy constructor and assignment
+	  MenuItem(const MenuItem &src) = delete;
+	  MenuItem &operator=(const MenuItem &src) = delete;
+	  void setName(const char *item);
+	  operator bool() const;
+	  operator const char *() const;
+	  std::ostream &display(std::ostream &ostr) const;
+   };
+   //// Menu Class:
+   class Menu
+   {
+	  MenuItem m_title;
+	  int m_numberOfItems;
+	  MenuItem *m_itemList[MAX_MENU_ITEMS]{};
+
+   public:
+	  Menu(const char *title = nullptr);
+	  ~Menu();
+	  // disable copy constructor and assignment
+	  Menu(const Menu &src) = delete;
+	  Menu &operator=(const Menu &src) = delete;
+	  unsigned int run() const;
+	  int operator~() const;
+	  Menu &operator<<(const char *menuItem);
+	  operator int() const;
+	  operator unsigned int() const;
+	  operator bool() const;
+	  char *operator[](int index) const;
+	  std::ostream &displayTitle(std::ostream &ostr) const;
+	  std::ostream &displayMenu(std::ostream &ostr) const;
+   };
+   std::ostream &operator<<(std::ostream &ostr, const Menu &ro);
+}
+#endif // !SDDS_MENU_H_
+
 */
