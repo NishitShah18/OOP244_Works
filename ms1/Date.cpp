@@ -20,6 +20,7 @@ that my professor provided to complete my project milestones.
 #include <iomanip>
 #include <iostream>
 #include <ctime>
+#include <Utils.h>
 using namespace std;
 #include "Date.h"
 namespace sdds {
@@ -118,7 +119,7 @@ namespace sdds {
        }
 
        // Flushes the keyboard
-       is.ignore(numeric_limits<streamsize>::max(), '\n');
+       clearInputBuffer();
        
        // Returns the istream object
        return is;

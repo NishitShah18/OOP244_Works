@@ -45,7 +45,9 @@ namespace sdds {
 
         do
         {
-            int null = scanf(" %d%c", &number, &newLine);
+            //cpp problems :(
+            exitPrompt = scanf(" %d%c", &number, &newLine);
+            exitPrompt = 0;
             if (newLine != '\n')
             {
                 clearInputBuffer();
