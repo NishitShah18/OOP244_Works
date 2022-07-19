@@ -1,0 +1,15 @@
+/*************************************************************************
+Workshop 7
+Full Name   : Nishit Gaurang Shah
+Student ID# : 130 176 217
+Email       : ngshah3@myseneca.ca
+Section     : OOP244NFF
+Date : 18th July 2022
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+*************************************************************************/
+
+In this workshop 7, I learned how to inherit a derived class from a base class and how to use input/output operators with two different classes. I had to implement two modules called MemberParliament and Minister, in which I had to inherit the Minister class from the MemberParliament class. Overall, the workshop was simple, and I had no difficulty implementing the functions, custom constructors, and operators in both modules. The most difficult part of this workshop was accessing and shadowing the copy function Object() { [native code] } in the Minister module from the MemberParliament module, but I figured it out after going over the notes and researching the concepts of derived classes and inheritance on the internet.
+
+I've finished the first milestone of my final project and am currently working on the second. I had considerable trouble finishing the Menu module in Milestone 1 since I needed to implement two separate classes, and I was unable to make the run function and the member insertion method for the Menu class. However, I was able to effectively implement those functions only after investing a lot of time in study, watching lecture recordings.
