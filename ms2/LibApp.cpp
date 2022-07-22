@@ -170,19 +170,16 @@ namespace sdds {
 						cout << endl;
 					}
 					else {
-						exitCode = confirm("This will discard all the changes are you sure ? ");
+						exitCode = confirm("This will discard all the changes are you sure? ");
 					}
 				}
 				else {
-					exitCode = true; //user choosed 0 ,end the loop
+					exitCode = true;
 				}
 			}
 		}
-		cout << endl;
-		cout << "-------------------------------------------" << endl;
-		//display footer
-		cout << "Thanks for using Seneca Library Application";
-		cout << endl;
+		cout << endl << "-------------------------------------------" << endl;
+		cout << "Thanks for using Seneca Library Application" << endl;
 
 		return;
 	}
