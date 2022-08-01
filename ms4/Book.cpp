@@ -63,25 +63,23 @@ namespace sdds {
 	}
 	ostream& Book::write(ostream& ostr)const 
 	{
-		ostr.setf(ios::left);
 		Publication::write(ostr);
 		if (conIO(ostr)) {
 			ostr << " ";
-			if (strlen(m_authorName) <= SDDS_AUTHOR_WIDTH) {
+			ostr.setf(ios::left);
+			if (strlen(m_authorName) > SDDS_AUTHOR_WIDTH) {
+				for (int i = 0; i < SDDS_AUTHOR_WIDTH; i++) ostr << m_authorName[i];
+			}
+			else {
 				ostr.width(SDDS_AUTHOR_WIDTH);
 				ostr << m_authorName;
 			}
-			else {
-				for (int i = 0; i < SDDS_AUTHOR_WIDTH; i++) {
-					ostr << m_authorName[i];
-				}
-			}
 			ostr << " |";
+			ostr.unsetf(ios::left);
 		}
 		else {
 			ostr << '\t' << m_authorName;
 		}
-		ostr.unsetf(ios::left);
 		return ostr;
 	}
 	istream& Book::read(istream& istr) 
@@ -98,7 +96,7 @@ namespace sdds {
 			Utils::getChar(istr, '\t');
 			istr.get(author, 256);
 		}
-		//if (!author) istr.setstate(ios::failbit); Ohh I don't need this
+		// if (!author) istr.setstate(ios::failbit); ohh no need..
 		if (istr) {
 			Utils::copyStr(m_authorName, author);
 		}
