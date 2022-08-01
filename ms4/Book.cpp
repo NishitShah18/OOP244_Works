@@ -65,10 +65,19 @@ namespace sdds {
 	{
 		Publication::write(ostr);
 		if (conIO(ostr)) {
-			char author[SDDS_AUTHOR_WIDTH + 1] = { 0 };
-			strncpy(author, m_authorName, SDDS_AUTHOR_WIDTH);
+			ostr.setf(ios::left);
 			ostr << " ";
-			ostr << std::setw(SDDS_AUTHOR_WIDTH) << std::left << std::setfill(' ') << author << " |";
+			if (strlen(m_authorName) > SDDS_AUTHOR_WIDTH) {
+				for (int i = 0; i < SDDS_AUTHOR_WIDTH; i++) {
+					ostr << m_authorName[i];
+				}
+			}
+			else {
+				ostr.width(SDDS_AUTHOR_WIDTH);
+				ostr << m_authorName;
+			}
+			ostr << " |";
+			ostr.unsetf(ios::left);
 		}
 		else {
 			ostr << '\t' << m_authorName;
