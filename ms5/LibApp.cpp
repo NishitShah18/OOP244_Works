@@ -291,8 +291,8 @@ namespace sdds {
 					if (confirm("Add this publication to the library?"))
 					{
 						m_PPA[m_NOLP] = pub;
-						m_PPA[m_NOLP]->setRef(m_LLRN);
 						m_LLRN++;
+						m_PPA[m_NOLP]->setRef(m_LLRN);
 						m_NOLP++;
 						cout << "Publication added" << endl;
 						m_changed = true;
@@ -329,17 +329,23 @@ namespace sdds {
 
 	void LibApp::removePublication() {
 		bool catchConfirm = false;
+		int catchSearch = 0;
 		// prints "Removing publication from library" + newline
 		cout << "Removing publication from library" << endl;
 		// calls the search method
-		search();
+		catchSearch = search();
 		// calls the confirm method with "Remove this publication from the library?"
 		catchConfirm = confirm("Remove this publication from the library?");
 		if (catchConfirm == true) {
+			getPub(catchSearch)->setRef(0);
 			//If confrim returns true, it will set m_changed to true
 			m_changed = true;
 			//Prints "Publication removed" + newline
 			cout << "Publication removed" << endl;
+		}
+		else
+		{
+			cout << "Aborted!" << endl;
 		}
 
 		return;
