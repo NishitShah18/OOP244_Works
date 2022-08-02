@@ -283,10 +283,10 @@ namespace sdds {
 				{
 					if (confirm("Add this publication to library?"))
 					{
-						m_changed = true;
 						m_PPA[m_NOLP] = pub;
-						m_LLRN = m_PPA[m_NOLP]->getRef();
+						m_PPA[m_NOLP]->setRef(++m_LLRN);
 						m_NOLP++;
+						m_changed = true;
 						cout << "Publication added" << endl << endl;
 					}
 					else 
