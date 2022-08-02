@@ -281,7 +281,7 @@ namespace sdds {
 				//using this prompt: "Add this publication to the library?".If the user did not confirm, print "Aborted!" and exit.
 				if (cin)
 				{
-					if (confirm("Add this publication to library?"))
+					if (confirm("Add this publication to the library?"))
 					{
 						m_PPA[m_NOLP] = pub;
 						m_PPA[m_NOLP]->setRef(++m_LLRN);
