@@ -22,17 +22,22 @@ that my professor provided to complete my project milestones.
 using namespace std;
 namespace sdds {
 
-	LibApp::LibApp(const char* fileName) :m_changed(false), m_NOLP(0), m_LLRN(0), m_mainMenu("Seneca Library Application"), m_exitMenu("Changes have been made to the data, what would you like to do?"), m_publicationTypeMenu("Choose the type of publication:") {
-		
+	LibApp::LibApp(const char* fileName, const char* mainTitle, const char*
+		exitTitle, const char* selectTitle) : m_NOLP(0), m_LLRN(0),
+		m_changed(false), m_mainMenu(mainTitle), m_exitMenu(exitTitle),
+		m_publicationTypeMenu(selectTitle) {
+		//initialize
 		strcpy(m_fileName, fileName);
-
+		
+		//set up menu options
 		m_mainMenu << "Add New Publication";
 		m_mainMenu << "Remove Publication";
 		m_mainMenu << "Checkout publication from library";
 		m_mainMenu << "Return publication to library";
 		m_exitMenu << "Save changes and exit";
 		m_exitMenu << "Cancel and go back to the main menu";
-		m_publicationTypeMenu << "Book" << "Publication";
+		m_publicationTypeMenu << "Book";
+		m_publicationTypeMenu << "Publication";
 
 		load();
 	}

@@ -35,7 +35,9 @@ namespace sdds {
 		Menu m_publicationTypeMenu;
 
 	public:
-		LibApp(const char* fileName);
+		LibApp(const char* fileName, const char* mainTitle = "Seneca Library Application",
+			const char* exitTitle = "Changes have been made to the data, what would you like to do?", 
+			const char* selectTitle = "Choose the type of publication:");
 		void run(); //The run method is the main application driver.
 		//rule of three
 		LibApp(const LibApp& src) = delete;
