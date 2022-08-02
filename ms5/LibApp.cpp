@@ -175,7 +175,6 @@ namespace sdds {
 		PublicationSelector pubSelector("Select one of the following found matches:",15);
 		char pubType{};
 		int catchMenu = m_publicationTypeMenu.run();
-		bool exitCode = false;
 		char pubTitle[259] = {0};
 		int ref = 0;
 		switch (catchMenu)
