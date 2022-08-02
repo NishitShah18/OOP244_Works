@@ -1,20 +1,25 @@
 /*
-Final Project Milestone 2
-Module      : Menu
-Filename    : Menu.h
-Version 1.0
+Final Project Milestone 5
+Module      : LibApp
+Filename    : LibApp.h
+Version 2.0
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
 Email       : ngshah3@myseneca.ca
 Section     : OOP244NFF
 
-Date : 22nd July 2022
+Date : 2nd August 2022
 
 Autheticity Declaraition :
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my project milestones.
 -----------------------------------------------------------
 */
+
+// Revision History
+// ---------------------------------------------------------------------
+// Name               Date                 Reason
+// Nishit             2022/08/02		   Updated according to MS-5
 
 #ifndef SDDS_LIBAPP_H__
 #define SDDS_LIBAPP_H__
@@ -39,34 +44,21 @@ namespace sdds {
 			const char* exitTitle = "Changes have been made to the data, what would you like to do?", 
 			const char* selectTitle = "Choose the type of publication:");
 		void run(); //The run method is the main application driver.
-		//rule of three
+		//Rule of three
 		LibApp(const LibApp& src) = delete;
 		LibApp& operator=(const LibApp& src) = delete;
 		virtual ~LibApp();
 	private:
-		bool confirm(const char* message); //Instantiates a Menu in this function and initialize it with the message argument.
-		void load();  // prints: "Loading Data"<NEWLINE>
-		void save();  // prints: "Saving Data"<NEWLINE>
+		bool confirm(const char* message); //Confirms what needed
+		void load();  //Loades Data
+		void save();  //Saves Data
 		Publication* getPub(int libRef);
-		int search(int option =1);  // prints: "Searching for publication"<NEWLINE>
+		int search(int option = 1);	//Searches for publication
 		void returnPub();  /*  Calls the search() method.
-							   prints "Returning publication"<NEWLINE>
-							   prints "Publication returned"<NEWLINE>
-							   sets m_changed to true;
-						   */
-		void newPublication(); /*  prints "Adding new publication to library"+newline
-								   calls the confirm method with "Add this publication to library?"
-								   if confrim returns true, it will set m_changed to true and prints "Publication added" + newline
-							   */
-		void removePublication(); /*  prints "Removing publication from library"+newline
-								      calls the search method
-									  calls the confirm method with "Remove this publication from the library?"
-									  if confrim returns true, it will set m_changed to true and prints "Publication removed" + newline
-								  */
-		void checkOutPub(); /* calls the search method
-							   calls the confirm method with Check out publication?"
-							   if confrim returns true, it will set m_changed to true and prints "Publication checked out" + newline
-							*/
+							   sets m_changed to true	*/
+		void newPublication(); //Adds new publication
+		void removePublication(); //Removes publication
+		void checkOutPub(); // checks publication out
 	};
 }
 

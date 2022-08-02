@@ -1,20 +1,27 @@
 /*
-Final Project Milestone 2
+Final Project Milestone 5
 Module      : LibApp
-Filename    : LibApp.h
-Version 1.0
+Filename    : LibApp.cpp
+Version 2.0
+
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
 Email       : ngshah3@myseneca.ca
 Section     : OOP244NFF
 
-Date : 22nd July 2022
+Date : 2nd August 2022
 
 Autheticity Declaraition :
 I have done all the coding by myself and only copied the code
 that my professor provided to complete my project milestones.
 -----------------------------------------------------------
 */
+
+// Revision History
+// ---------------------------------------------------------------------
+// Name               Date                 Reason
+// Nishit             2022/08/02		   Updated according to MS-5
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
@@ -284,10 +291,11 @@ namespace sdds {
 					if (confirm("Add this publication to the library?"))
 					{
 						m_PPA[m_NOLP] = pub;
-						m_PPA[m_NOLP]->setRef(++m_LLRN);
+						m_PPA[m_NOLP]->setRef(m_LLRN);
+						m_LLRN++;
 						m_NOLP++;
-						m_changed = true;
 						cout << "Publication added" << endl;
+						m_changed = true;
 					}
 					else 
 					{

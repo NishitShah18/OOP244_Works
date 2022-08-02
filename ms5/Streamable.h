@@ -1,5 +1,5 @@
 /*
-Final Project Milestone 4
+Final Project Milestone 5
 Module      : Streamable
 Filename    : Streamable.h
 Version 1.0
@@ -9,7 +9,7 @@ Student ID# : 130 176 217
 Email       : ngshah3@myseneca.ca
 Section     : OOP244NFF
 
-Date : 1st August 2022
+Date : 2nd August 2022
 
 Autheticity Declaraition :
 I have done all the coding by myself and only copied the code
@@ -17,8 +17,8 @@ that my professor provided to complete my project milestones.
 -----------------------------------------------------------
 */
 
-#ifndef SDDS_STREAMABLE_H_
-#define SDDS_STREAMABLE_H_
+#ifndef SDDS_STREAMABLE_H__
+#define SDDS_STREAMABLE_H__
 #include <iostream>
 using namespace std;
 namespace sdds

@@ -1,15 +1,15 @@
 /*
-Final Project Milestone 4
+Final Project Milestone 5
 Module      : Utils
 Filename    : Utils.cpp
-Version 1.0
+Version 3.0
 
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
 Email       : ngshah3@myseneca.ca
 Section     : OOP244NFF
 
-Date : 1st August 2022
+Date : 2nd August 2022
 
 Autheticity Declaraition :
 I have done all the coding by myself and only copied the code
@@ -21,6 +21,7 @@ that my professor provided to complete my project milestones.
 // ---------------------------------------------------------------------
 // Name               Date                 Reason
 // Nishit             2022/07/29		   Implementation of Utils Class
+// Nishit             2022/08/02           Implementation of suspend(), inputInt() and inputIntRange().
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
