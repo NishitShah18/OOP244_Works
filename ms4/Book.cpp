@@ -67,12 +67,14 @@ namespace sdds {
 		if (conIO(ostr)) {
 			ostr << " ";
 			ostr.setf(ios::left);
-			if (strlen(m_authorName) > SDDS_AUTHOR_WIDTH) {
-				for (int i = 0; i < SDDS_AUTHOR_WIDTH; i++) ostr << m_authorName[i];
-			}
-			else {
+			if (strlen(m_authorName) <= SDDS_AUTHOR_WIDTH) {
 				ostr.width(SDDS_AUTHOR_WIDTH);
 				ostr << m_authorName;
+			}
+			else {
+				for (int i = 0; i < SDDS_AUTHOR_WIDTH; i++) {
+					ostr << m_authorName[i];
+				}
 			}
 			ostr << " |";
 			ostr.unsetf(ios::left);
