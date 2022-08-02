@@ -229,17 +229,17 @@ namespace sdds {
 				}
 				else
 				{
-					cout << "Aborted!" << endl << endl;
+					cout << "Aborted!" << endl;
 				}
 			}
 			else 
 			{
-				cout << "No matches found!" << endl << endl;
+				cout << "No matches found!" << endl;
 			}
 		}
 		else
 		{
-			cout << "Aborted!" << endl << endl;
+			cout << "Aborted!" << endl;
 		}
 		return ref;
 	}
@@ -248,7 +248,7 @@ namespace sdds {
 
 		// If the NOLP is equal to the SDDS_LIBRARY_CAPACITY, print: "Library is at its maximum capacity!" and exit.
 		if (m_NOLP == SDDS_LIBRARY_CAPACITY) {
-			cout << "Library is at its maximum capacity!" << endl << endl;
+			cout << "Library is at its maximum capacity!" << endl;
 		}
 		//Otherwise,
 		else
@@ -269,7 +269,7 @@ namespace sdds {
 				break;
 			case 0:
 				pub = nullptr;
-				cout << "Aborted!" << endl << endl;
+				cout << "Aborted!" << endl;
 				break;
 			}
 			if (pub)
@@ -287,17 +287,17 @@ namespace sdds {
 						m_PPA[m_NOLP]->setRef(++m_LLRN);
 						m_NOLP++;
 						m_changed = true;
-						cout << "Publication added" << endl << endl;
+						cout << "Publication added" << endl;
 					}
 					else 
 					{
-						cout << "Failed to add publication!" << endl << endl;
+						cout << "Failed to add publication!" << endl;
 						delete pub;
 					}
 				}
 				else
 				{
-					cout << "Aborted!" << endl << endl;
+					cout << "Aborted!" << endl;
 					delete pub;
 				}
 			}
