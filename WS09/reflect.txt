@@ -1,0 +1,15 @@
+/*************************************************************************
+Workshop 9
+Full Name   : Nishit Gaurang Shah
+Student ID# : 130 176 217
+Email       : ngshah3@myseneca.ca
+Section     : OOP244NFF
+Date : 1st August 2022
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+*************************************************************************/
+
+In this workshop 9, I learned how to derive a class with resources from a base class that has a dynamic Cstring. By following the rule of three, I also learned how to utilise the copy constructor, copy assignment operator, and destructor on a base class and a derived class. FullName was derived from Name, which served as its base class. Overall, the implementation was fairly easy because all the functions and operators were correctly named and described by the professor, and I was able to get the desired outcomes. While defining the display function, I had some issues where I needed to put the Name, one space, and the m value of the FullName into the ostream reference without going to a new line, provided that the FullName is not empty.   However, after going over the lecture notes, I was able to execute it.
+
+Additionally, I have finished Milestones one to four of the final project and am currently working on Milestone 5. In earlier reflections, I talked about milestones 1 and 2. Because I had problems creating a few of the functions in the Publication module, Milestone 3 was a little harder for me than the prior ones. For the milestone 4, I had some problems with rule of three, but I over came them and completed it today.
