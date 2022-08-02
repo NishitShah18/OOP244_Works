@@ -92,4 +92,24 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\OOP-Project\ms5\m51_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\OOP-Project\ms5\m52_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\OOP-Project\ms5\m53_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\OOP-Project\ms5\m54_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\OOP-Project\ms5\m55_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\OOP-Project\ms5\m56_correct_output.md">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

@@ -17,8 +17,12 @@ that my professor provided to complete my project milestones.
 */
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <fstream>
 #include <cstring>
 #include "LibApp.h"
+#include "Utils.h"
+#include "PublicationSelector.h"
+#include "Book.h"
 using namespace std;
 namespace sdds {
 
@@ -115,22 +119,190 @@ namespace sdds {
 	}
 
 	void LibApp::load() {
-		// prints: "Loading Data"<NEWLINE>
 		cout << "Loading Data" << endl;
-
+		ifstream fptr(m_fileName);
+		char type{};
+		for (int i = 0; fptr; i++) {
+			fptr >> type;
+			fptr.ignore();
+			if (fptr) {
+				if (type == 'P')
+				{
+					m_PPA[i] = new Publication;
+				}
+				else if (type == 'B')
+				{
+					m_PPA[i] = new Book;
+				}
+				else
+				{
+					cout << "no data" << endl;
+				}
+				if (m_PPA[i] && i < SDDS_LIBRARY_CAPACITY) {
+					fptr >> *m_PPA[i];
+					m_LLRN = m_PPA[m_NOLP]->getRef();
+					m_NOLP++;
+				}
+			}
+		}
 		return;
 	}
 	
 	void LibApp::save() {
-		// prints: "Saving Data"<NEWLINE>
 		cout << "Saving Data" << endl;
-
+		ofstream fptr(m_fileName);
+		for (int i = 0; i < m_NOLP; i++) {
+			if (m_PPA[i]->getRef() != 0)
+			{
+				fptr << *m_PPA[i] << endl;
+			}
+		}
 		return;
 	}
 
-	void LibApp::search() {
-		// prints: "Searching for publication"<NEWLINE>
-		cout << "Searching for publication" << endl;
+	Publication* LibApp::getPub(int libRef) {
+		Publication* pub{};
+		for (int i = 0; i < m_NOLP && !pub; i++) {
+			if (m_PPA[i]->getRef() == libRef)
+			{
+				pub = m_PPA[i];
+			}
+		}
+		return pub;
+	}
+
+	int LibApp::search(int option) {
+		PublicationSelector pubSelector("Select one of the following found matches:",15);
+		char pubType{};
+		int catchMenu = m_publicationTypeMenu.run();
+		bool exitCode = false;
+		char pubTitle[259] = {0};
+		int ref = 0;
+		switch (catchMenu)
+		{
+			case 1:
+					pubType = 'B';
+					break;
+			case 2:
+					pubType = 'P';
+					break;
+		}
+
+		if (catchMenu == 1 || catchMenu == 2)
+		{
+			cout << "Publication Title: ";
+			cin.getline(pubTitle, 256, '\n');
+			if (option == 1)
+			{
+				for (int i = 0; i < m_NOLP; i++) {
+					if (m_PPA[i]->type() == pubType && m_PPA[i]->getRef() != 0 && *m_PPA[i] == pubTitle)
+					{
+						pubSelector << m_PPA[i];
+					}
+				}
+			}
+			else if (option == 2)
+			{
+				for (int i = 0; i < m_NOLP; i++) {
+					if (m_PPA[i]->type() == pubType && m_PPA[i]->getRef() != 0 && *m_PPA[i] == pubTitle && m_PPA[i]->onLoan())
+					{
+						pubSelector << m_PPA[i];
+					}
+				}
+			}
+			else if (option == 3)
+			{
+				for (int i = 0; i < m_NOLP; i++) {
+					if (m_PPA[i]->type() == pubType && m_PPA[i]->getRef() != 0 && *m_PPA[i] == pubTitle && !m_PPA[i]->onLoan())
+					{
+						pubSelector << m_PPA[i];
+					}
+				}
+			}
+			if (pubSelector)
+			{
+				pubSelector.sort();
+				ref = pubSelector.run();
+
+				if (ref)
+				{
+					cout << *getPub(ref) << endl;
+				}
+				else
+				{
+					cout << "Aborted!" << endl << endl;
+				}
+			}
+			else 
+			{
+				cout << "No matches found!" << endl << endl;
+			}
+		}
+		else
+		{
+			cout << "Aborted!" << endl << endl;
+		}
+		return ref;
+	}
+
+	void LibApp::newPublication() {
+
+		// If the NOLP is equal to the SDDS_LIBRARY_CAPACITY, print: "Library is at its maximum capacity!" and exit.
+		if (m_NOLP == SDDS_LIBRARY_CAPACITY) {
+			cout << "Library is at its maximum capacity!" << endl << endl;
+		}
+		//Otherwise,
+		else
+		{
+			//print: "Adding new publication to the library"
+			cout << "Adding new publication to the library" << endl;
+			//get the publication type from the user.
+			Publication* pub{};
+			int catchMenu = m_publicationTypeMenu.run();
+			switch (catchMenu)
+			{
+			//in a publication pointer, instantiate a dynamic "Publication" or "Book" based on the user's choice.
+			case 1:
+				pub = new Book;
+				break;
+			case 2:
+				pub = new Publication;
+				break;
+			case 0:
+				pub = nullptr;
+				cout << "Aborted!" << endl << endl;
+				break;
+			}
+			if (pub)
+			{
+				//Read the instantiated object from the cin object.
+				cin >> *pub;
+				//If the cin is ok, 
+				//then confirm that the user wants to add the publication to the library 
+				//using this prompt: "Add this publication to the library?".If the user did not confirm, print "Aborted!" and exit.
+				if (cin)
+				{
+					if (confirm("Add this publication to library?"))
+					{
+						m_changed = true;
+						m_PPA[m_NOLP] = pub;
+						m_LLRN = m_PPA[m_NOLP]->getRef();
+						m_NOLP++;
+						cout << "Publication added" << endl << endl;
+					}
+					else 
+					{
+						cout << "Failed to add publication!" << endl << endl;
+						delete pub;
+					}
+				}
+				else
+				{
+					cout << "Aborted!" << endl << endl;
+					delete pub;
+				}
+			}
+		}
 
 		return;
 	}
@@ -144,22 +316,6 @@ namespace sdds {
 		cout << "Publication returned" << endl;
 		// sets m_changed to true;
 		m_changed = true;
-
-		return;
-	}
-
-	void LibApp::newPublication() {
-		bool catchConfirm = false;
-		// prints "Adding new publication to library"+newline
-		cout << "Adding new publication to library" << endl;
-		// calls the confirm method with "Add this publication to library?"
-		catchConfirm = confirm("Add this publication to library?");
-		if (catchConfirm == true) {
-			//If confrim returns true, it will set m_changed to true
-			m_changed = true;
-			//Prints "Publication added" + newline
-			cout << "Publication added" << endl;
-		}
 
 		return;
 	}

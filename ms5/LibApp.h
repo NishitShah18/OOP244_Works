@@ -47,7 +47,8 @@ namespace sdds {
 		bool confirm(const char* message); //Instantiates a Menu in this function and initialize it with the message argument.
 		void load();  // prints: "Loading Data"<NEWLINE>
 		void save();  // prints: "Saving Data"<NEWLINE>
-		void search();  // prints: "Searching for publication"<NEWLINE>
+		Publication* getPub(int libRef);
+		int search(int option =1);  // prints: "Searching for publication"<NEWLINE>
 		void returnPub();  /*  Calls the search() method.
 							   prints "Returning publication"<NEWLINE>
 							   prints "Publication returned"<NEWLINE>
@@ -66,7 +67,6 @@ namespace sdds {
 							   calls the confirm method with Check out publication?"
 							   if confrim returns true, it will set m_changed to true and prints "Publication checked out" + newline
 							*/
-	
 	};
 }
 
