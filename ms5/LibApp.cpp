@@ -337,6 +337,7 @@ namespace sdds {
 		// calls the confirm method with "Remove this publication from the library?"
 		catchConfirm = confirm("Remove this publication from the library?");
 		if (catchConfirm == true) {
+			//Removes publication
 			getPub(catchSearch)->setRef(0);
 			//If confrim returns true, it will set m_changed to true
 			m_changed = true;
