@@ -330,8 +330,8 @@ namespace sdds {
 	void LibApp::removePublication() {
 		bool catchConfirm = false;
 		int catchSearch = 0;
-		// prints "Removing publication from library" + newline
-		cout << "Removing publication from library" << endl;
+		// prints "Removing publication from the library" + newline
+		cout << "Removing publication from the library" << endl;
 		// calls the search method
 		catchSearch = search();
 		// calls the confirm method with "Remove this publication from the library?"
