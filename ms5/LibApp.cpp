@@ -321,20 +321,22 @@ namespace sdds {
 		catchSearch = search(3);
 		// calls the confirm method with Check out publication?"
 		if (catchSearch != 0) {
-			confirm("Check out publication?");
-			//read a 5 digit number from the console, if invalid print: "Invalid membership number, try again: " and read again
-			cout << "Enter Membership number: ";
-			membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
-			//set the membership number of the selected publication the integer value.
-			getPub(catchSearch)->setRef(membershipNumber);
-			//If confrim returns true, it will set m_changed to true
-			m_changed = true;
-			//Prints "Publication checked out" + newline
-			cout << "Publication checked out" << endl;
-		}
-		else
-		{
-			cout << "Aborted!" << endl;
+			if(confirm("Check out publication?"))
+			{
+				//read a 5 digit number from the console, if invalid print: "Invalid membership number, try again: " and read again
+				cout << "Enter Membership number: ";
+				membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
+				//set the membership number of the selected publication the integer value.
+				getPub(catchSearch)->setRef(membershipNumber);
+				//If confrim returns true, it will set m_changed to true
+				m_changed = true;
+				//Prints "Publication checked out" + newline
+				cout << "Publication checked out" << endl;
+			}
+			else
+			{
+				cout << "Aborted!" << endl;
+			}
 		}
 
 		return;
