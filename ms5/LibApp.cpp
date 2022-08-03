@@ -328,7 +328,7 @@ namespace sdds {
 				cout << "Enter Membership number: ";
 				membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
 				//set the membership number of the selected publication the integer value.
-				getPub(catchSearch)->setRef(membershipNumber);
+				getPub(catchSearch)->set(membershipNumber);
 				//If confrim returns true, it will set m_changed to true
 				m_changed = true;
 				//Prints "Publication checked out" + newline
