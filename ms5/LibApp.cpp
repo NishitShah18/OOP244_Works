@@ -26,6 +26,7 @@ that my professor provided to complete my project milestones.
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <iomanip>
 #include "LibApp.h"
 #include "Utils.h"
 #include "PublicationSelector.h"
@@ -318,20 +319,14 @@ namespace sdds {
 		int membershipNumber = 0;
 		char errorMessage[39] = "Invalid membership number, try again: ";
 		cout << "Checkout publication from the library" << endl;
-		// calls the search method
 		catchSearch = search(3);
-		// calls the confirm method with Check out publication?"
 		if (catchSearch != 0) {
 			if(confirm("Check out publication?"))
 			{
-				//read a 5 digit number from the console, if invalid print: "Invalid membership number, try again: " and read again
 				cout << "Enter Membership number: ";
 				membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
-				//set the membership number of the selected publication the integer value.
 				getPub(catchSearch)->set(membershipNumber);
-				//If confrim returns true, it will set m_changed to true
 				m_changed = true;
-				//Prints "Publication checked out" + newline
 				cout << "Publication checked out" << endl;
 			}
 			else
@@ -344,14 +339,34 @@ namespace sdds {
 	}
 
 	void LibApp::returnPub() {
-		// Calls the search() method.
-		search(3);
-		// prints "Returning publication" < NEWLINE >
-		cout << "Returning publication" << endl;
-		// prints "Publication returned"<NEWLINE>
-		cout << "Publication returned" << endl;
-		// sets m_changed to true;
-		m_changed = true;
+		int catchSearch = 0;
+		// Print: "Return publication to the library"
+		cout << "Return publication to the library" << endl;
+		// Search for "on loan" publications only
+		catchSearch = search(3);
+		if (catchSearch != 0) {
+			if (confirm("Return Publication?"))
+			{
+				Date returnDate;
+				Date checkoutDate = getPub(catchSearch)->checkoutDate();
+				int loanedDays = returnDate - checkoutDate;
+				//If the publication is more than 15 days on loan, a 50 cents per day penalty will be calculated for the number of days exceeding the 15 days.
+				if (loanedDays > SDDS_MAX_LOAN_DAYS)
+				{
+					cout << fixed << setprecision(2) << "Please pay $" << double(loanedDays) * (0.5) << " penalty for being" << loanedDays - SDDS_MAX_LOAN_DAYS << " days late!" << endl;
+				}
+				// set the membership number of the publication to 0 (zero)
+				getPub(catchSearch)->set(0);
+				// set the "changed" flag to true
+				m_changed = true;
+				// prints "Publication returned"<NEWLINE>
+				cout << "Publication returned" << endl;
+			}
+			else
+			{
+				cout << "Aborted!" << endl;
+			}
+		}
 
 		return;
 	}
