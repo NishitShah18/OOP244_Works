@@ -343,7 +343,7 @@ namespace sdds {
 		// Print: "Return publication to the library"
 		cout << "Return publication to the library" << endl;
 		// Search for "on loan" publications only
-		catchSearch = search(3);
+		catchSearch = search(2);
 		if (catchSearch != 0) {
 			if (confirm("Return Publication?"))
 			{
