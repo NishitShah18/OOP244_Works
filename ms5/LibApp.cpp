@@ -92,7 +92,7 @@ namespace sdds {
 						cout << endl;
 					}
 					else {
-						exitCode = confirm("This will discard all the changes are you sure? ");
+						exitCode = confirm("This will discard all the changes are you sure?");
 					}
 				}
 				else {
