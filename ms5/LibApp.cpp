@@ -302,14 +302,16 @@ namespace sdds {
 		cout << "Removing publication from the library" << endl;
 		catchSearch = search();
 		if (catchSearch != 0) {
-			confirm("Remove this publication from the library?");
-			getPub(catchSearch)->setRef(0);
-			m_changed = true;
-			cout << "Publication removed" << endl;
-		}
-		else
-		{
-			cout << "Aborted!" << endl;
+			if (confirm("Remove this publication from the library?"))
+			{
+				getPub(catchSearch)->setRef(0);
+				m_changed = true;
+				cout << "Publication removed" << endl;
+			}
+			else
+			{
+				cout << "Aborted!" << endl;
+			}
 		}
 		return;
 	}
