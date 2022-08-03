@@ -317,6 +317,7 @@ namespace sdds {
 		int catchSearch = 0;
 		int membershipNumber = 0;
 		char errorMessage[39] = "Invalid membership number, try again: ";
+		cout << "Checkout publication from the library" << endl;
 		// calls the search method
 		catchSearch = search(3);
 		// calls the confirm method with Check out publication?"
