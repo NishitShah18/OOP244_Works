@@ -1,5 +1,5 @@
 /*
-Final Project Milestone 5
+Final Project Milestone 5 Completed
 Module      : LibApp
 Filename    : LibApp.h
 Version 2.0

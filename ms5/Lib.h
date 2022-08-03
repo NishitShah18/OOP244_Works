@@ -1,7 +1,7 @@
 /*
 Final Project Milestone 5
 Filename    : Lib.h
-Version 1.0
+Version 2.0
 
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
@@ -16,6 +16,11 @@ that my professor provided to complete my project milestones.
 -----------------------------------------------------------
 */
 
+// Revision History
+// ---------------------------------------------------------------------
+// Name               Date                 Reason
+// Nishit             2022/08/02           SDDS_LIBRARY_CAPACITY Modification
+
 #ifndef SDDS_LIB_H__
 #define SDDS_LIB_H__
 #include <iostream>
@@ -29,7 +34,7 @@ namespace sdds
     // The width in which the author name of a book should be printed on the console
     const int SDDS_SHELF_ID_LEN = 4;
     // The width in which the shelf id of a publication should be printed on the console
-    const int SDDS_LIBRARY_CAPACITY = 5000;
+    const int SDDS_LIBRARY_CAPACITY = 333;
     // Maximum number of publications the library can hold.
 }
 #endif // !SDDS_LIB_H__

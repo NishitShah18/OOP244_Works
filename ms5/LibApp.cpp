@@ -1,5 +1,5 @@
 /*
-Final Project Milestone 5
+Final Project Milestone 5 Completed
 Module      : LibApp
 Filename    : LibApp.cpp
 Version 2.0
@@ -340,9 +340,7 @@ namespace sdds {
 
 	void LibApp::returnPub() {
 		int catchSearch = 0;
-		// Print: "Return publication to the library"
 		cout << "Return publication to the library" << endl;
-		// Search for "on loan" publications only
 		catchSearch = search(2);
 		if (catchSearch != 0) {
 			if (confirm("Return Publication?"))
@@ -350,17 +348,13 @@ namespace sdds {
 				Date returnDate;
 				Date checkoutDate = getPub(catchSearch)->checkoutDate();
 				int loanedDays = returnDate - checkoutDate;
-				//If the publication is more than 15 days on loan, a 50 cents per day penalty will be calculated for the number of days exceeding the 15 days.
 				if (loanedDays > SDDS_MAX_LOAN_DAYS)
 				{
 					int lateDays = loanedDays - SDDS_MAX_LOAN_DAYS;
 					cout << fixed << setprecision(2) << "Please pay $" << double(lateDays) * (0.5) << " penalty for being " << lateDays << " days late!" << endl;
 				}
-				// set the membership number of the publication to 0 (zero)
 				getPub(catchSearch)->set(0);
-				// set the "changed" flag to true
 				m_changed = true;
-				// prints "Publication returned"<NEWLINE>
 				cout << "Publication returned" << endl;
 			}
 			else
