@@ -37,10 +37,7 @@ namespace sdds {
 		exitTitle, const char* selectTitle) : m_NOLP(0), m_LLRN(0),
 		m_changed(false), m_mainMenu(mainTitle), m_exitMenu(exitTitle),
 		m_publicationTypeMenu(selectTitle) {
-		//initialize
 		strcpy(m_fileName, fileName);
-		
-		//set up menu options
 		m_mainMenu << "Add New Publication";
 		m_mainMenu << "Remove Publication";
 		m_mainMenu << "Checkout publication from library";
@@ -49,7 +46,6 @@ namespace sdds {
 		m_exitMenu << "Cancel and go back to the main menu";
 		m_publicationTypeMenu << "Book";
 		m_publicationTypeMenu << "Publication";
-
 		load();
 	}
 
@@ -112,16 +108,12 @@ namespace sdds {
 	bool LibApp::confirm(const char* message) {
 		bool returnValue = false;
 		int catchRun = 0;
-		//Instantiate a Menu in this function and initialize it with the message argument.
 		Menu obj(message); 
-		//Then add only a "yes" as a single menu item to the Menu.
 		obj << "Yes";
-		//Run the menu
 		catchRun = obj.run();
 		if (catchRun == 1) { 
 			returnValue = true;
 		}
-		//Return true if the run method of Menu returns 1 and otherwise this function returns false.
 		return returnValue;
 	}
 
@@ -252,22 +244,16 @@ namespace sdds {
 	}
 
 	void LibApp::newPublication() {
-
-		// If the NOLP is equal to the SDDS_LIBRARY_CAPACITY, print: "Library is at its maximum capacity!" and exit.
 		if (m_NOLP == SDDS_LIBRARY_CAPACITY) {
 			cout << "Library is at its maximum capacity!" << endl;
 		}
-		//Otherwise,
 		else
 		{
-			//print: "Adding new publication to the library"
 			cout << "Adding new publication to the library" << endl;
-			//get the publication type from the user.
 			Publication* pub{};
 			int catchMenu = m_publicationTypeMenu.run();
 			switch (catchMenu)
 			{
-			//in a publication pointer, instantiate a dynamic "Publication" or "Book" based on the user's choice.
 			case 1:
 				pub = new Book;
 				break;
@@ -281,11 +267,7 @@ namespace sdds {
 			}
 			if (pub)
 			{
-				//Read the instantiated object from the cin object.
 				cin >> *pub;
-				//If the cin is ok, 
-				//then confirm that the user wants to add the publication to the library 
-				//using this prompt: "Add this publication to the library?".If the user did not confirm, print "Aborted!" and exit.
 				if (cin)
 				{
 					if (confirm("Add this publication to the library?"))
@@ -314,35 +296,43 @@ namespace sdds {
 		return;
 	}
 
-	void LibApp::returnPub() {
-		// Calls the search() method.
-		search();
-		// prints "Returning publication" < NEWLINE >
-		cout << "Returning publication" << endl;
-		// prints "Publication returned"<NEWLINE>
-		cout << "Publication returned" << endl;
-		// sets m_changed to true;
-		m_changed = true;
-
-		return;
-	}
-
 	void LibApp::removePublication() {
 		bool catchConfirm = false;
 		int catchSearch = 0;
-		// prints "Removing publication from the library" + newline
 		cout << "Removing publication from the library" << endl;
-		// calls the search method
 		catchSearch = search();
-		// calls the confirm method with "Remove this publication from the library?"
 		catchConfirm = confirm("Remove this publication from the library?");
-		if (catchConfirm == true) {
-			//Removes publication
+		if (catchConfirm == true && catchSearch != 0) {
 			getPub(catchSearch)->setRef(0);
+			m_changed = true;
+			cout << "Publication removed" << endl;
+		}
+		else
+		{
+			cout << "Aborted!" << endl;
+		}
+		return;
+	}
+
+	void LibApp::checkOutPub() {
+		bool catchConfirm = false;
+		int catchSearch = 0;
+		int membershipNumber = 0;
+		char errorMessage[39] = "Invalid membership number, try again: ";
+		// calls the search method
+		catchSearch = search(3);
+		// calls the confirm method with Check out publication?"
+		catchConfirm = confirm("Check out publication?");
+		if (catchConfirm == true && catchSearch != 0) {
+			//read a 5 digit number from the console, if invalid print: "Invalid membership number, try again: " and read again
+			cout << "Enter Membership number: ";
+			membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
+			//set the membership number of the selected publication the integer value.
+			getPub(catchSearch)->setRef(membershipNumber);
 			//If confrim returns true, it will set m_changed to true
 			m_changed = true;
-			//Prints "Publication removed" + newline
-			cout << "Publication removed" << endl;
+			//Prints "Publication checked out" + newline
+			cout << "Publication checked out" << endl;
 		}
 		else
 		{
@@ -352,24 +342,17 @@ namespace sdds {
 		return;
 	}
 
-	void LibApp::checkOutPub() {
-		bool catchConfirm = false;
-		// calls the search method
-		search();
-		// calls the confirm method with Check out publication?"
-		catchConfirm = confirm("Check out publication?");
-		if (catchConfirm == true) {
-			//If confrim returns true, it will set m_changed to true
-			m_changed = true;
-			//Prints "Publication checked out" + newline
-			cout << "Publication checked out" << endl;
-		}
+	void LibApp::returnPub() {
+		// Calls the search() method.
+		search(3);
+		// prints "Returning publication" < NEWLINE >
+		cout << "Returning publication" << endl;
+		// prints "Publication returned"<NEWLINE>
+		cout << "Publication returned" << endl;
+		// sets m_changed to true;
+		m_changed = true;
 
 		return;
 	}
-
-	
-
-	
 
 }

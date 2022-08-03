@@ -24,9 +24,6 @@
     <ClCompile Include="LibApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LibAppMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LibAppMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,9 +77,6 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="BooksOriginal.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="LibRecs.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="LibRecsOriginal.txt">

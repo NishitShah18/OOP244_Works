@@ -3,6 +3,7 @@ Final Project Milestone 5
 Module      : LibApp
 Filename    : LibApp.h
 Version 2.0
+
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
 Email       : ngshah3@myseneca.ca

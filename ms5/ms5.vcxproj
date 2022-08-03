@@ -151,7 +151,6 @@
   <ItemGroup>
     <Text Include="Books.txt" />
     <Text Include="BooksOriginal.txt" />
-    <Text Include="LibRecs.txt" />
     <Text Include="LibRecsOriginal.txt" />
     <Text Include="LibRecsSmall.txt" />
     <Text Include="LibRecsSmallOriginal.txt" />

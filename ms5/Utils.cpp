@@ -2,7 +2,7 @@
 Final Project Milestone 5
 Module      : Utils
 Filename    : Utils.cpp
-Version 3.0
+Version 4.0
 
 Author	    : Nishit Gaurang Shah
 Student ID# : 130 176 217
@@ -22,6 +22,7 @@ that my professor provided to complete my project milestones.
 // Name               Date                 Reason
 // Nishit             2022/07/29		   Implementation of Utils Class
 // Nishit             2022/08/02           Implementation of suspend(), inputInt() and inputIntRange().
+// Nishit             2022/08/02           Created new functions for custom error messages
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
@@ -71,6 +72,31 @@ namespace sdds
         return number;
     }
 
+    int Utils::inputIntWithMessage(char* message)
+    {
+        int number = 0, exitPrompt = 0;
+        char newLine = '\0';
+
+        do
+        {
+            //cpp problems :(
+            exitPrompt = scanf(" %d%c", &number, &newLine);
+            exitPrompt = 0;
+            if (newLine != '\n')
+            {
+                clearInputBuffer();
+                cout << message;
+            }
+            else
+            {
+                exitPrompt = 1;
+            }
+        } while (exitPrompt != 1);
+        exitPrompt = 0;
+
+        return number;
+    }
+
     int Utils::inputIntRange(int lowerBound, int upperBound)
     {
         int number = 0, exitPrompt = 0;
@@ -92,6 +118,26 @@ namespace sdds
         return number;
     }
 
+    int Utils::inputIntRangeWithMessage(int lowerBound, int upperBound, char *message)
+    {
+        int number = 0, exitPrompt = 0;
+
+        do
+        {
+            number = inputIntWithMessage(message);
+            if (number < lowerBound || number > upperBound)
+            {
+                cout << message;
+            }
+            else
+            {
+                exitPrompt = 1;
+            }
+        } while (exitPrompt != 1);
+        exitPrompt = 0;
+
+        return number;
+    }
 
     void Utils::getChar(std::istream &is, char c)
     {
