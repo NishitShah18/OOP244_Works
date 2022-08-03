@@ -301,8 +301,8 @@ namespace sdds {
 		int catchSearch = 0;
 		cout << "Removing publication from the library" << endl;
 		catchSearch = search();
+		if (catchSearch != 0) {
 		catchConfirm = confirm("Remove this publication from the library?");
-		if (catchConfirm == true && catchSearch != 0) {
 			getPub(catchSearch)->setRef(0);
 			m_changed = true;
 			cout << "Publication removed" << endl;
@@ -322,8 +322,8 @@ namespace sdds {
 		// calls the search method
 		catchSearch = search(3);
 		// calls the confirm method with Check out publication?"
+		if (catchSearch != 0) {
 		catchConfirm = confirm("Check out publication?");
-		if (catchConfirm == true && catchSearch != 0) {
 			//read a 5 digit number from the console, if invalid print: "Invalid membership number, try again: " and read again
 			cout << "Enter Membership number: ";
 			membershipNumber = Utils::inputIntRangeWithMessage(9999, 100000, errorMessage);
