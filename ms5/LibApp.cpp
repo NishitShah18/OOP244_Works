@@ -353,7 +353,8 @@ namespace sdds {
 				//If the publication is more than 15 days on loan, a 50 cents per day penalty will be calculated for the number of days exceeding the 15 days.
 				if (loanedDays > SDDS_MAX_LOAN_DAYS)
 				{
-					cout << fixed << setprecision(2) << "Please pay $" << double(loanedDays) * (0.5) << " penalty for being" << loanedDays - SDDS_MAX_LOAN_DAYS << " days late!" << endl;
+					int lateDays = loanedDays - SDDS_MAX_LOAN_DAYS;
+					cout << fixed << setprecision(2) << "Please pay $" << double(lateDays) * (0.5) << " penalty for being " << lateDays << " days late!" << endl;
 				}
 				// set the membership number of the publication to 0 (zero)
 				getPub(catchSearch)->set(0);
