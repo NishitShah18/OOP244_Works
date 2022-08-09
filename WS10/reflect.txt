@@ -1,0 +1,17 @@
+/*************************************************************************
+Workshop 10
+Full Name   : Nishit Gaurang Shah
+Student ID# : 130 176 217
+Email       : ngshah3@myseneca.ca
+Section     : OOP244NFF
+Date : 8th August 2022
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+*************************************************************************/
+
+I've learned how to make function templates thanks to this workshop. Templates are a prime example of parametric polymorphism, where the type and the logic are independent, in object-oriented programming. We define function in a separate header file to serve as a template. After that, using the template there, we can define a function. The client code can be of any type, which is a huge benefit of using a template. This means that any type can be supplied to the function without it failing.
+
+For me, the workshop 10 was rather straightforward this time. The main issue I encountered during this workshop was that I kept having issues with the search() template method, which takes three arguments. This was caused by the incorrect parameter order I specified in the function call. However, after speaking with some of my professional siblings, I was able to pinpoint the problem.
+
+To conclude the templates topic of CPP, by not limiting the variable type, using templates can help us avoid having to create separate loads for a function, making our code simpler to read, debug, and maintain. 
