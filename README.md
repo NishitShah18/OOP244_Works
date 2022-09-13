@@ -10,13 +10,71 @@ Section: OOP244 NFF
 <table>
   <tr>
     <th>Info</th>
-    <th>Due Date</th>
     <th>Grades</th>
   </tr>
   <tr>
-    <td>Workshop - 1</td>
-    <td>September 18</td>
-    <td>??/10</td>
+    <td>Workshop - 1 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 1 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 2 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 2 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 3 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 3 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 4 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 4 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 5 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 5 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 6 Part 1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 6 Part 2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 7</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 8</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 9</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Workshop - 10</td>
+    <td>10/10</td>
   </tr>
 </table>
 
