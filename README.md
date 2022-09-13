@@ -76,6 +76,46 @@ Section: OOP244 NFF
     <td>Workshop - 10</td>
     <td>10/10</td>
   </tr>
+  <tr>
+    <td>Final Project - MS1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS3</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS4</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-1</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-2</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-3</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-4</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-5</td>
+    <td>10/10</td>
+  </tr>
+  <tr>
+    <td>Final Project - MS5-6</td>
+    <td>10/10</td>
+  </tr>
 </table>
 
 <hr>
