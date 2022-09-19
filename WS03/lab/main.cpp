@@ -1,3 +1,18 @@
+/*************************************************************************
+Workshop 3 Part 1
+Full Name   : Nishit Gaurang Shah
+Student ID# : 130 176 217
+Email       : ngshah3@myseneca.ca
+Section     : OOP244NFF
+
+Date : 3rd June 2022
+
+Autheticity Declaraition :
+I declare that I have done all the coding by myself and only copied the
+code that my professor provided to complete my workshops and assignments.
+
+*************************************************************************/
+
 /* ------------------------------------------------------
 Workshop 3 part 1
 Module: N/A
@@ -7,8 +22,8 @@ Version 1.0
 -------------------------------------------------------*/
 
 #include <iostream>
-#include "Army.h"
 using namespace std;
+#include "Army.h"
 using namespace sdds;
 
 int main() {
@@ -66,7 +81,7 @@ int main() {
 	cout << "----------------------------------------" << endl;
 	cout << "5. Testing the battle function." << endl;
 	cout << "----------------------------------------" << endl;
-	battle(armies[0],armies[2]);
+	battle(armies[0], armies[2]);
 	battle(armies[3], armies[4]);
 	displayDetails(armies, 6);
 	cout << "----------------------------------------" << endl << endl;
